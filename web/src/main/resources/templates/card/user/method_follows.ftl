@@ -72,9 +72,12 @@ $(function() {
 			jQuery.getJSON('${base}/user/unfollow',{'id': id},  function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
+					location.reload();
+				}
+				<#--if (ret.code >=0) {
 					$('#loop-' + id).fadeOut();
 					$('#loop-' + id).remove();
-				}
+				}-->
 			});
 
         }, function(){

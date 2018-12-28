@@ -9,6 +9,8 @@
 */
 package mblog.web.controller.site.user;
 
+import java.util.Map;
+
 import mblog.modules.blog.data.CommentVO;
 import mblog.modules.blog.data.FavorVO;
 import mblog.modules.blog.data.FeedsVO;
@@ -27,6 +29,7 @@ import mblog.modules.user.service.UserService;
 import mblog.shiro.authc.AccountSubject;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -190,9 +193,15 @@ public class UserController extends BaseController {
 	private void pushBadgesCount() {
 		AccountProfile profile = (AccountProfile) session.getAttribute("profile");
 		if (profile != null && profile.getBadgesCount() != null) {
-			BadgesCount count = new BadgesCount();
-			count.setNotifies(notifyService.unread4Me(profile.getId()));
-			profile.setBadgesCount(count);
+			BadgesCount badgesCount = new BadgesCount();
+			int notifies =notifyService.unread4Me(profile.getId());
+			Map<String,Integer> count= notifyService.searchUseCount(profile.getId());
+			badgesCount.setNotifies(notifies);
+			badgesCount.setComments(count.get("comments"));
+			badgesCount.setFavors(count.get("favors"));
+			badgesCount.setFollows(count.get("follows"));
+			badgesCount.setPosts(count.get("posts"));
+			profile.setBadgesCount(badgesCount);
 			session.setAttribute("profile", profile);
 		}
 	}

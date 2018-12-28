@@ -29,7 +29,7 @@ spring:
 
     jpa:
         database: mysql
-        show-sql: false
+        show-sql: true
         hibernate:
             ddl-auto: update
         properties:
@@ -55,5 +55,6 @@ spring:
 site:
     theme: card
     store:
+      repo: absolute
       root: /data/mblog/
       size: 2
