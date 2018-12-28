@@ -19,4 +19,10 @@ public interface FavorDao extends JpaRepository<Favor, Long>, JpaSpecificationEx
     Favor findByOwnIdAndPostId(long ownId, long postId);
 
     Page<Favor> findAllByOwnIdOrderByCreatedDesc(Pageable pageable, long ownId);
+    /**
+     * 查询喜欢数量
+     * @param ownId
+     * @return
+     */
+    int countByOwnId(long ownId);
 }

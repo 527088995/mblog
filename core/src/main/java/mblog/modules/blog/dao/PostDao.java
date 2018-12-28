@@ -63,5 +63,11 @@ public interface PostDao extends JpaRepository<Post, Long>, JpaSpecificationExec
 	@Transactional
 	@Query("update Post set comments = comments + :increment where id = :id")
 	void updateComments(@Param("id") long id, @Param("increment") int increment);
+	/**
+	 * 查询文章数量
+	 * @param authorId
+	 * @return
+	 */
+	int countByAuthorId(long authorId);
 	
 }

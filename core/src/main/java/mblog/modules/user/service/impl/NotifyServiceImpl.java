@@ -2,14 +2,19 @@ package mblog.modules.user.service.impl;
 
 import mblog.base.lang.Consts;
 import mblog.modules.user.data.NotifyVO;
+import mblog.modules.blog.dao.CommentDao;
+import mblog.modules.blog.dao.FavorDao;
+import mblog.modules.blog.dao.PostDao;
 import mblog.modules.blog.data.PostVO;
 import mblog.modules.user.data.UserVO;
 import mblog.modules.blog.service.PostService;
+import mblog.modules.user.dao.FollowDao;
 import mblog.modules.user.dao.NotifyDao;
 import mblog.modules.user.entity.Notify;
 import mblog.modules.user.service.NotifyService;
 import mblog.modules.user.service.UserService;
 import mblog.modules.utils.BeanMapUtils;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +32,14 @@ import java.util.*;
 public class NotifyServiceImpl implements NotifyService {
     @Autowired
     private NotifyDao notifyDao;
+    @Autowired
+    private FollowDao followDao;
+    @Autowired
+    private FavorDao favorDao;
+	@Autowired
+	private CommentDao commentDao;
+	@Autowired
+	private PostDao postDao;
     @Autowired
     private UserService userService;
     @Autowired
@@ -92,6 +105,14 @@ public class NotifyServiceImpl implements NotifyService {
         return notifyDao.countByOwnIdAndStatus(ownId, Consts.UNREAD);
     }
 
+    public Map<String,Integer>  searchUseCount(long ownId){
+    	Map<String,Integer> resultMap=new HashMap<String,Integer>();
+    	resultMap.put("follows", followDao.countByUserId(ownId));
+    	resultMap.put("favors", favorDao.countByOwnId(ownId));
+    	resultMap.put("comments", commentDao.countByAuthorId(ownId));
+    	resultMap.put("posts", postDao.countByAuthorId(ownId));
+    	return resultMap;
+    }
     @Override
     @Transactional
     public void readed4Me(long ownId) {

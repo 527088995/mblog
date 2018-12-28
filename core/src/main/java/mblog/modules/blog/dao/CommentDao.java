@@ -31,4 +31,10 @@ public interface CommentDao extends JpaRepository<Comment, Long>, JpaSpecificati
 	List<Comment> findAllByAuthorIdAndToIdOrderByCreatedDesc(long authorId, long toId);
 
 	int deleteAllByIdIn(Collection<Long> ids);
+	/**
+	 * 查询评论数量
+	 * @param authorId
+	 * @return
+	 */
+	int countByAuthorId(long authorId);
 }
