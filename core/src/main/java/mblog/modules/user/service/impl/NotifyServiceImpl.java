@@ -101,6 +101,7 @@ public class NotifyServiceImpl implements NotifyService {
         return notifyDao.countByOwnIdAndStatus(ownId, Consts.UNREAD);
     }
 
+    @Override
     public User searchUseCount(long ownId){
         User user=userDao.findById(ownId);
     	return user;
