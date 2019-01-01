@@ -1,9 +1,8 @@
 package mblog.modules.user.service;
 
-import java.util.Map;
-
 import mblog.modules.user.data.NotifyVO;
 
+import mblog.modules.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -31,7 +30,7 @@ public interface NotifyService {
      * @param ownId
      * @return
      */
-    Map<String,Integer>  searchUseCount(long ownId);
+    User searchUseCount(long ownId);
 
     /**
      * 标记为已读

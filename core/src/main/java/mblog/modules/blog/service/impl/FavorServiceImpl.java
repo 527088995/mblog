@@ -1,11 +1,13 @@
 package mblog.modules.blog.service.impl;
 
+import mblog.base.lang.Consts;
 import mblog.modules.blog.data.FavorVO;
 import mblog.modules.blog.data.PostVO;
 import mblog.modules.blog.dao.FavorDao;
 import mblog.modules.blog.entity.Favor;
 import mblog.modules.blog.service.FavorService;
 import mblog.modules.blog.service.PostService;
+import mblog.modules.user.service.UserEventService;
 import mblog.modules.utils.BeanMapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +28,8 @@ public class FavorServiceImpl implements FavorService {
     private FavorDao favorDao;
     @Autowired
     private PostService postService;
+    @Autowired
+    private UserEventService userEventService;
 
     @Override
     @Transactional
@@ -41,6 +45,7 @@ public class FavorServiceImpl implements FavorService {
         po.setCreated(new Date());
 
         favorDao.save(po);
+        userEventService.identityFavors(userId, true, Consts.IDENTITY_STEP,Consts.DECREASE_STEP);
     }
 
     @Override
@@ -49,6 +54,7 @@ public class FavorServiceImpl implements FavorService {
         Favor po = favorDao.findByOwnIdAndPostId(userId, postId);
         Assert.notNull(po, "还没有喜欢过此文章");
         favorDao.delete(po);
+        userEventService.identityFavors(userId, false, Consts.IDENTITY_STEP,Consts.DECREASE_STEP);
     }
 
     @Override
