@@ -18,7 +18,7 @@
 							<#if row.post??>
                                 <a href="${base}/view/${row.post.id}" class="remove-padding-left">${row.post.title}</a>
 							<#else>
-                                <a href="javascript:;" class="remove-padding-left">文章已删除</a>
+                                <a href="javascript:;" class="remove-padding-left">文章已删除!</a>
 							</#if>
                             <span class="meta">
 								<span class="timeago">${timeAgo(row.created)}</span>
