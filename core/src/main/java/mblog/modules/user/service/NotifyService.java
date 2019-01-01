@@ -26,7 +26,7 @@ public interface NotifyService {
      */
     int unread4Me(long ownId);
     /**
-     * 查询数量
+     * 查询用户操作数量
      * @param ownId
      * @return
      */
