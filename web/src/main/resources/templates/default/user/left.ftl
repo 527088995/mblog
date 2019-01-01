@@ -74,7 +74,7 @@
             <li class="list-group-item">
                 <a href="${base}/user?method=fans"><i class="icon icon-user-follow"></i> 我的粉丝
                 <#if (profile.badgesCount.fans > 0)>
-                        <span class="label label-info">${profile.badgesCount.notifies}</span>
+                        <span class="label label-info">${profile.badgesCount.fans}</span>
                     <#else>
                         <span class="label label-default">0</span>
                     </#if>

@@ -1,5 +1,5 @@
 server:
-    port: 8080 #服务器用80端口
+    port: 80 #服务器用80端口
 spring:
     devtools:
         enabled: true
@@ -23,13 +23,13 @@ spring:
 
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/db_mblog?useSSL=false&characterEncoding=utf8
+        url: jdbc:mysql://106.13.55.232:3306/db_mblog?useSSL=false&characterEncoding=utf8
         username: root
-        password: rdsroot
+        password: root
 
     jpa:
         database: mysql
-        show-sql: false
+        show-sql: true
         hibernate:
             ddl-auto: update
         properties:

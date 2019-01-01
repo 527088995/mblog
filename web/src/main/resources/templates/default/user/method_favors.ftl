@@ -25,7 +25,7 @@
       						</span>
 
                             <div class="pull-right hidden-xs">
-                                <a class="act" href="javascript:void(0);" data-evt="unfavor" data-id="${target.id}">
+                                <a class="act" href="javascript:void(0);" data-evt="unfavor" data-id="${row.post.id}">
                                     <i class="icon icon-close"></i>
 								</a>
                             </div>
