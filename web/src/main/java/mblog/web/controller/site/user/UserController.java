@@ -23,6 +23,7 @@ import mblog.modules.user.data.AccountProfile;
 import mblog.modules.user.data.BadgesCount;
 import mblog.modules.user.data.NotifyVO;
 import mblog.modules.user.data.UserVO;
+import mblog.modules.user.entity.User;
 import mblog.modules.user.service.FollowService;
 import mblog.modules.user.service.NotifyService;
 import mblog.modules.user.service.UserService;
@@ -195,12 +196,13 @@ public class UserController extends BaseController {
 		if (profile != null && profile.getBadgesCount() != null) {
 			BadgesCount badgesCount = new BadgesCount();
 			int notifies =notifyService.unread4Me(profile.getId());
-			Map<String,Integer> count= notifyService.searchUseCount(profile.getId());
+			User user= notifyService.searchUseCount(profile.getId());
 			badgesCount.setNotifies(notifies);
-			badgesCount.setComments(count.get("comments"));
-			badgesCount.setFavors(count.get("favors"));
-			badgesCount.setFollows(count.get("follows"));
-			badgesCount.setPosts(count.get("posts"));
+			badgesCount.setComments(user.getComments());
+			badgesCount.setFans(user.getFans());
+			badgesCount.setFavors(user.getFavors());
+			badgesCount.setFollows(user.getFollows());
+			badgesCount.setPosts(user.getPosts());
 			profile.setBadgesCount(badgesCount);
 			session.setAttribute("profile", profile);
 		}
