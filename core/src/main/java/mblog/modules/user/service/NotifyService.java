@@ -1,6 +1,8 @@
 package mblog.modules.user.service;
 
 import mblog.modules.user.data.NotifyVO;
+
+import mblog.modules.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,6 +25,12 @@ public interface NotifyService {
      * @return
      */
     int unread4Me(long ownId);
+    /**
+     * 查询用户操作数量
+     * @param ownId
+     * @return
+     */
+    User searchUseCount(long ownId);
 
     /**
      * 标记为已读

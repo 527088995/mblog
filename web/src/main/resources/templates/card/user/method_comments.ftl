@@ -65,11 +65,14 @@ $(function() {
 			jQuery.getJSON('${base}/comment/delete', {'id':id }, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
+					location.reload();
+				}
+				<#--if (ret.code >=0) {
 					var el = $('li[el=loop-' + id + ']');
                     el.next().remove();
                     el.next().remove();
                     el.remove();
-				}
+				}-->
 			});
             
         }, function(){

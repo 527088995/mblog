@@ -255,6 +255,8 @@ public class PostServiceImpl implements PostService {
 		attr.setContent(post.getContent());
 		attr.setId(po.getId());
 		submitAttr(attr);
+		
+		userEventService.identityPost(post.getAuthorId(), po.getId(), true);
 
 		onPushEvent(po, PostUpdateEvent.ACTION_PUBLISH);
 		return po.getId();

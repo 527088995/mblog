@@ -25,7 +25,7 @@
       						</span>
 
                             <div class="pull-right hidden-xs">
-                                <a class="act" href="javascript:void(0);" data-evt="unfavor" data-id="${target.id}">
+                                <a class="act" href="javascript:void(0);" data-id="${row.post.id}" data-evt="unfavor" >
                                     <i class="icon icon-close"></i>
 								</a>
                             </div>
@@ -65,9 +65,12 @@ $(function() {
 			jQuery.getJSON('${base}/user/unfavor', {'id': id}, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
+					location.reload();
+				}
+				<#--if (ret.code >=0) {
 					$('#loop-' + id).fadeOut();
 					$('#loop-' + id).remove();
-				}
+				}-->
 			});
 
         }, function(){

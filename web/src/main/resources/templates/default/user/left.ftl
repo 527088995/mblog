@@ -33,22 +33,52 @@
                 <a href="${base}/user"><i class="icon icon-layers"></i> 动态</a>
             </li>
             <li class="list-group-item">
-                <a href="${base}/user?method=posts"><i class="icon icon-list"></i> 我的文章</a>
+                <a href="${base}/user?method=posts"><i class="icon icon-list"></i> 我的文章
+                <#if (profile.badgesCount.posts > 0)>
+                        <span class="label label-info">${profile.badgesCount.posts}</span>
+                    <#else>
+                        <span class="label label-default">0</span>
+                    </#if>
+                </a>
             </li>
             <li class="list-group-item">
-                <a href="${base}/user?method=comments"><i class="icon icon-speech"></i> 我的评论</a>
+                <a href="${base}/user?method=comments"><i class="icon icon-speech"></i> 我的评论
+                <#if (profile.badgesCount.comments > 0)>
+                        <span class="label label-info">${profile.badgesCount.comments}</span>
+                    <#else>
+                        <span class="label label-default">0</span>
+                    </#if>
+                </a>
             </li>
         </ul>
 
         <ul class="list-group user-nav">
             <li class="list-group-item">
-                <a href="${base}/user?method=favors"><i class="icon icon-heart"></i> 我的喜欢</a>
+                <a href="${base}/user?method=favors"><i class="icon icon-heart"></i> 我的喜欢
+                <#if (profile.badgesCount.favors > 0)>
+                        <span class="label label-info">${profile.badgesCount.favors}</span>
+                    <#else>
+                        <span class="label label-default">0</span>
+                    </#if>
+                </a>
             </li>
             <li class="list-group-item">
-                <a href="${base}/user?method=follows"><i class="icon icon-user-following"></i> 我的关注</a>
+                <a href="${base}/user?method=follows"><i class="icon icon-user-following"></i> 我的关注
+                <#if (profile.badgesCount.follows > 0)>
+                        <span class="label label-info">${profile.badgesCount.follows}</span>
+                    <#else>
+                        <span class="label label-default">0</span>
+                    </#if>
+                </a>
             </li>
             <li class="list-group-item">
-                <a href="${base}/user?method=fans"><i class="icon icon-user-follow"></i> 我的粉丝</a>
+                <a href="${base}/user?method=fans"><i class="icon icon-user-follow"></i> 我的粉丝
+                <#if (profile.badgesCount.fans > 0)>
+                        <span class="label label-info">${profile.badgesCount.fans}</span>
+                    <#else>
+                        <span class="label label-default">0</span>
+                    </#if>
+                </a>
             </li>
         </ul>
 

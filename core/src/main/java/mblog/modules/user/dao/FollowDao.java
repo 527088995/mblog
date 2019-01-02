@@ -69,4 +69,10 @@ public interface FollowDao extends JpaRepository<Follow, Long>, JpaSpecification
 	 * @return
 	 */
 	int deleteByUserAndFollow(User user, User follow);
+	/**
+	 * 查询关注数量
+	 * @param user
+	 * @return
+	 */
+	int countByUserId(long user);
 }

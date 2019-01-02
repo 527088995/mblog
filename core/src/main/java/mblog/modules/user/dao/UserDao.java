@@ -61,4 +61,5 @@ public interface UserDao extends JpaRepository<User, Long>, JpaSpecificationExec
     @Query("update User set favors = favors + :increment where id = :id")
     int updateFavors(@Param("id") long id, @Param("increment") int increment);
 
+    User findById(long id);
 }

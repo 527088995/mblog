@@ -66,5 +66,5 @@ public interface FollowService {
 	 * @return true:相互关注
 	 */
 	boolean checkCrossFollow(long userId, long targetUserId);
-
+	
 }

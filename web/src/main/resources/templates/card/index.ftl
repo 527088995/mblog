@@ -17,7 +17,7 @@
     <@contents pn=pn order=order>
     <div class="row main">
         <#list results.content as row>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="col-lg-12 col-md-4 col-sm-6 col-xs-12">
                 <div class="block">
                     <a class="block-thumbnail" href="${base}/view/${row.id}">
                         <div class="thumbnail-overlay"></div>
@@ -37,6 +37,24 @@
                         </p>
                     </div>
                 </div>
+                <li class="list-group-item media col-md-12" style="margin-top: 0px;">
+                    <a class="reply_last_time hidden-xs meta" href="/content/11386">
+                        <span class="stress">13</span> 浏览<span> ⋅ </span>0 回复
+                    </a>
+
+                    <div class="avatar pull-left">
+                        <a href="/user/1">
+                            <img class="media-object img-thumbnail avatar avatar-middle" src="http://qzapp.qlogo.cn/qzapp/101235848/934F5897B49DE64FACE2E0F47C7A6472/100" alt="">
+                        </a>
+                    </div>
+
+                    <div class="infos">
+                        <div class="media-heading">
+                            <span class="hidden-xs label label-default">问答</span>
+                            <a href="/content/11386">${row.title}</a>
+                        </div>
+                    </div>
+                </li>
             </div>
         </#list>
     </div>

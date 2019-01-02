@@ -21,12 +21,14 @@ import mblog.modules.user.data.AccountProfile;
 import mblog.modules.user.data.BadgesCount;
 import mblog.modules.user.data.NotifyVO;
 import mblog.modules.user.data.UserVO;
+import mblog.modules.user.entity.User;
 import mblog.modules.user.service.FollowService;
 import mblog.modules.user.service.NotifyService;
 import mblog.modules.user.service.UserService;
 import mblog.shiro.authc.AccountSubject;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.Views;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -190,9 +192,16 @@ public class UserController extends BaseController {
 	private void pushBadgesCount() {
 		AccountProfile profile = (AccountProfile) session.getAttribute("profile");
 		if (profile != null && profile.getBadgesCount() != null) {
-			BadgesCount count = new BadgesCount();
-			count.setNotifies(notifyService.unread4Me(profile.getId()));
-			profile.setBadgesCount(count);
+			BadgesCount badgesCount = new BadgesCount();
+			int notifies =notifyService.unread4Me(profile.getId());
+			User user= notifyService.searchUseCount(profile.getId());
+			badgesCount.setNotifies(notifies);
+			badgesCount.setComments(user.getComments());
+			badgesCount.setFans(user.getFans());
+			badgesCount.setFavors(user.getFavors());
+			badgesCount.setFollows(user.getFollows());
+			badgesCount.setPosts(user.getPosts());
+			profile.setBadgesCount(badgesCount);
 			session.setAttribute("profile", profile);
 		}
 	}

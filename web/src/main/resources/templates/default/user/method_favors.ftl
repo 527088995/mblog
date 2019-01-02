@@ -18,14 +18,14 @@
 							<#if row.post??>
                                 <a href="${base}/view/${row.post.id}" class="remove-padding-left">${row.post.title}</a>
 							<#else>
-                                <a href="javascript:;" class="remove-padding-left">文章已删除</a>
+                                <a href="javascript:;" class="remove-padding-left">文章已删除!</a>
 							</#if>
                             <span class="meta">
 								<span class="timeago">${timeAgo(row.created)}</span>
       						</span>
 
                             <div class="pull-right hidden-xs">
-                                <a class="act" href="javascript:void(0);" data-evt="unfavor" data-id="${target.id}">
+                                <a class="act" href="javascript:void(0);" data-evt="unfavor" data-id="${row.post.id}">
                                     <i class="icon icon-close"></i>
 								</a>
                             </div>
@@ -65,9 +65,12 @@ $(function() {
 			jQuery.getJSON('${base}/user/unfavor', {'id': id}, function (ret) {
 				layer.msg(ret.message, {icon: 1});
 				if (ret.code >=0) {
+					location.reload();
+				}
+				<!--if (ret.code >=0) {
 					$('#loop-' + id).fadeOut();
 					$('#loop-' + id).remove();
-				}
+				}-->
 			});
 
         }, function(){
