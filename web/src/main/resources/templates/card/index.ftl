@@ -30,8 +30,8 @@
 					<span>${row.tags} ⋅ </span> <span class="timeago">${timeAgo(row.created)}</span>
 				</a>
 				<a class="reply_last_time hidden-xs meta" 
+				
 					href="${base}/view/${row.id}"> <span class="stress">${row.views}</span>
-					
 					阅读 ⋅<span> ${row.comments}</span> 评论
 				</a>
 			</div>
