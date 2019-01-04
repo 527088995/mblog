@@ -68,6 +68,7 @@ public class PostController extends BaseController {
 
 		AccountProfile profile = getSubject().getProfile();
 		post.setAuthorId(profile.getId());
+		post.setAuthorName(profile.getName());
 
 		/**
 		 * 保存预览图片

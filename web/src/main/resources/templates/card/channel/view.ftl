@@ -14,14 +14,18 @@
                 <h1 class="panel-title topic-title">${view.title}</h1>
 
                 <div class="meta inline-block">
-
-                    <a class="author" href="${base}/users/${view.author.id}">
-                    ${view.author.name}
+					<abbr class="timeago">${view.created} </abbr>
+                    <a class="author" style="color: #78a5f1;" href="${base}/users/${view.author.id}">
+                    ${view.author.name}  
                     </a>
-                    <abbr class="timeago">${timeAgo(view.created)}</abbr>
-                    ⋅
-                ${view.views} 阅读
-
+                	阅读数 : ${view.views} ⋅ 标签  :
+					<#if view.tags??>
+			               	<#list view.tagsArray as tag>
+			                   	<span>
+		                           	<a class="label label-default" style="color: #78a5f1;" href="${base}/tag/${tag}/">#${tag}</a>
+		                       </span>
+			               </#list>
+                    </#if>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -31,13 +35,7 @@
                 ${view.content}
                 </div>
             </div>
-            <div class="panel-footer operate">
-                <#list view.tagsArray as tag>
-                    <span>
-                            <a class="label label-default" href="${base}/tag/${tag}/">#${tag}</a>
-                        </span>
-                </#list>
-            </div>
+            
             <div class="panel-footer operate">
                 <div class="hidden-xs">
                     <div class="social-share" data-sites="weibo, wechat, facebook, twitter, google, qzone, qq"></div>

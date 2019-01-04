@@ -13,12 +13,14 @@ ${site_metas}
 <link rel='stylesheet' media='all' href="${base}/dist/vendors/pace/themes/pace-theme-minimal.css"/>
 
 <link rel="stylesheet" media="all" href="${base}/dist/vendors/highlight/styles/github.css"/>
+<link rel="stylesheet" media="all" href="${base}/dist/vendors/bootstrap-tagsinput/bootstrap-tagsinput.css"/>
 
 <script type="text/javascript" src="${base}/dist/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/dist/js/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="${base}/dist/vendors/layer/layer.js"></script>
 <script type="text/javascript" src="${base}/dist/vendors/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${base}/dist/vendors/validate/jquery-validate.js"></script>
+<script type="text/javascript" src="${base}/dist/vendors/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
 <script type="text/javascript" src="${base}/theme/default/js/utils.js"></script>
 

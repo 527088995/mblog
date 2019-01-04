@@ -403,35 +403,35 @@ abbr[data-original-title], abbr[title] {
     transition: .5s;
 }
 
-/* 滚动条
+/* 婊氬姩鏉�
 -------------------------------------------------- */
-/*滚动条宽度*/
+/*婊氬姩鏉″搴�*/
 ::-webkit-scrollbar {
     width: 5px;
 }
 
-/* 轨道样式 */
+/* 杞ㄩ亾鏍峰紡 */
 ::-webkit-scrollbar-track {
 
 }
 
-/* Handle样式 */
+/* Handle鏍峰紡 */
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.2);
 }
 
-/*当前窗口未激活的情况下*/
+/*褰撳墠绐楀彛鏈縺娲荤殑鎯呭喌涓�*/
 ::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(0, 0, 0, 0.1);
 }
 
-/*hover到滚动条上*/
+/*hover鍒版粴鍔ㄦ潯涓�*/
 ::-webkit-scrollbar-thumb:vertical:hover {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-/*滚动条按下*/
+/*婊氬姩鏉℃寜涓�*/
 ::-webkit-scrollbar-thumb:vertical:active {
     background-color: rgba(0, 0, 0, 0.7);
 }
@@ -852,7 +852,7 @@ abbr[data-original-title], abbr[title] {
     margin-left: 20px;
     margin-top: 18px;
     padding-left: 10px;
-    float: right !important;
+    /* float: right !important; */
 }
 
 .reply_last_time:hover {
@@ -1198,7 +1198,7 @@ abbr[data-original-title], abbr[title] {
     font-size: 13px;
 }
 
-/*热门用户样式 */
+/*鐑棬鐢ㄦ埛鏍峰紡 */
 .hotusers { overflow: hidden; float: left; padding: 2px; width: 100%;}
 .hotusers > li { float: left; display: inline-block; margin: 3px;}
 .hotusers .avatar-small {width: 50px; height: 50px;}
@@ -1256,7 +1256,7 @@ abbr[data-original-title], abbr[title] {
 .user-basic-info .follow-info a.text {
     color: #999; }
 
-/* 上传头像按钮 */
+/* 涓婁紶澶村儚鎸夐挳 */
 .upload-btn {text-align: center;}
 .upload-btn label { background-color: #62c162; color: white; padding: 6px 0px; font-size: 40%; font-weight: bold; cursor: pointer; border-radius: 2px; position: relative; overflow: hidden; display: block; width: 240px; margin: 10px auto 0px auto; }
 .upload-btn label:hover { background-color: #5cb85c; }
@@ -1264,7 +1264,7 @@ abbr[data-original-title], abbr[title] {
 .upload-btn input { position: absolute; top: 0; right: 0; margin: 0; border: solid transparent; opacity: .0; filter: alpha(opacity = 0); direction: ltr; cursor: pointer; }
 
 /*
-修改头像
+淇敼澶村儚
 */
 .update_ava { width: 240px; min-height: 240px; margin: 10px auto; text-align: center; background-color: #fafafa; border: 1px solid #ebebeb; border-radius: 3px;}
 
@@ -1312,7 +1312,7 @@ abbr[data-original-title], abbr[title] {
 .cbox-wrap .ats-issue .btn {border-radius: 0!important; padding: 5px 16px;}
 #chat_reply {color: #1f8902;}
 
-/*	Phiz	表情	*/
+/*	Phiz	琛ㄦ儏	*/
 .phiz-box { padding-top:10px; text-align:center; }
 .phiz-box:before, .phiz-box:after { content:""; display:table; }
 .phiz-box:after { clear:both; }
