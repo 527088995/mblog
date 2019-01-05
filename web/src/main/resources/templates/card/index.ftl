@@ -26,6 +26,7 @@
 			<div class="summary oneline">${row.summary}</div>
 			<div class="info-box d-flex align-content-center">
 				<a class="reply_last_time hidden-xs meta" style="float: left;margin-left: 0px;padding-left: 0px;"
+				
 					 href="${base}/users/${row.authorId}"> ${row.authorName} ⋅ 
 					<span>${row.tags} ⋅ </span> <span class="timeago">${timeAgo(row.created)}</span>
 				</a>

@@ -23,13 +23,13 @@ spring:
 
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://180.76.55.91:3306/db_mblog?useSSL=false&characterEncoding=utf8
-        username: rdsroot
-        password: rdsroot
+        url: jdbc:mysql://106.13.55.232:3306/db_mblog?useSSL=false&characterEncoding=utf8
+        username: root
+        password: root
 
     jpa:
         database: mysql
-        show-sql: false
+        show-sql: true
         hibernate:
             ddl-auto: update
         properties:
@@ -55,5 +55,6 @@ spring:
 site:
     theme: card
     store:
+      repo: absolute
       root: /data/mblog/
       size: 2
