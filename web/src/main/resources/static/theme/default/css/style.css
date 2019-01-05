@@ -852,7 +852,7 @@ abbr[data-original-title], abbr[title] {
     margin-left: 20px;
     margin-top: 18px;
     padding-left: 10px;
-    float: right !important;
+    /*float: right !important;*/
 }
 
 .reply_last_time:hover {
