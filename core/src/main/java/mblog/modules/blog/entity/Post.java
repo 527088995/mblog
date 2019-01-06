@@ -44,6 +44,20 @@ public class Post implements Serializable {
 	@NumericField
 	@Column(name = "channel_id", length = 5)
 	private int channelId;
+	/**
+	 * 文章类型
+	 */
+	@Field
+	@NumericField
+	@Column(name = "article_type_id", length = 5)
+	private int articleTypeId;
+	/**
+	 * 博客分类
+	 */
+	@Field
+	@NumericField
+	@Column(name = "blog_class_id", length = 5)
+	private int blogClassId;
 
 	/**
 	 * 标题
@@ -73,6 +87,9 @@ public class Post implements Serializable {
 	@NumericField
 	@Column(name = "author_id")
 	private long authorId; // 作者
+	
+	@Column(name = "author_name")
+	private String authorName;//作者名字
 
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date created;
@@ -119,6 +136,22 @@ public class Post implements Serializable {
 		return channelId;
 	}
 
+	public int getArticleTypeId() {
+		return articleTypeId;
+	}
+
+	public void setArticleTypeId(int articleTypeId) {
+		this.articleTypeId = articleTypeId;
+	}
+
+	public int getBlogClassId() {
+		return blogClassId;
+	}
+
+	public void setBlogClassId(int blogClassId) {
+		this.blogClassId = blogClassId;
+	}
+
 	public void setChannelId(int channelId) {
 		this.channelId = channelId;
 	}
@@ -161,6 +194,14 @@ public class Post implements Serializable {
 
 	public void setAuthorId(long authorId) {
 		this.authorId = authorId;
+	}
+
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
 	}
 
 	public int getStatus() {

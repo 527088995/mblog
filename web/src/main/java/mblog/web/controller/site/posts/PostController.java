@@ -5,6 +5,8 @@ package mblog.web.controller.site.posts;
 
 import mblog.base.data.Data;
 import mblog.base.lang.Consts;
+import mblog.modules.blog.service.ArticleTypeService;
+import mblog.modules.blog.service.BlogClassService;
 import mblog.modules.user.data.AccountProfile;
 import mblog.modules.blog.data.PostVO;
 import mblog.modules.blog.service.ChannelService;
@@ -33,6 +35,10 @@ public class PostController extends BaseController {
 	private PostService postService;
 	@Autowired
 	private ChannelService channelService;
+	@Autowired
+	private BlogClassService blogClassService;
+	@Autowired
+	private ArticleTypeService articleTypeService;
 
 	/**
 	 * 发布文章页
@@ -41,6 +47,8 @@ public class PostController extends BaseController {
 	@GetMapping("/editing")
 	public String view(Long id, ModelMap model) {
 		model.put("channels", channelService.findAll(Consts.STATUS_NORMAL));
+		model.put("blogClasss", blogClassService.findAll(Consts.STATUS_NORMAL));
+		model.put("articleTypes", articleTypeService.findAll(Consts.STATUS_NORMAL));
 
 		if (null != id && id > 0) {
 			AccountProfile profile = getSubject().getProfile();
@@ -68,6 +76,7 @@ public class PostController extends BaseController {
 
 		AccountProfile profile = getSubject().getProfile();
 		post.setAuthorId(profile.getId());
+		post.setAuthorName(profile.getName());
 
 		/**
 		 * 保存预览图片

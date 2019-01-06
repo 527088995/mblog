@@ -1,19 +1,114 @@
 <#include "/default/utils/ui.ftl"/> <#assign topId = 1 /> <@layout>
-<ol class="breadcrumb ">
-	<li title="发布时间排序"<#if order == 'newest'> class="active" </#if>>
-		<a href="?order=newest">最近</a>
-	</li>
-	<li title="点赞数排序"<#if order == 'favors'> class="active" </#if>> <a
-		href="?order=favors">投票</a>
-	</li>
-	<li title="评论次数排序"<#if order == 'hottest'> class="active" </#if>>
-		<a href="?order=hottest">热门</a>
-	</li>
-</ol>
-
 <@contents pn=pn order=order>
-<div class="row main">
-    <div class="col-xs-12 col-md-12 side-left">
+<div class="row users-show streams">
+    <div class="col-xs-12 col-md-2 side-left">
+        <nav class="navbar navbar-default shadow-box background-white">
+            <div id="home-navbar" class="collapse navbar-collapse">
+                <ul class="list-group user-nav first">
+                    <li class="list-group-item">
+                        <a href="/user"><i class="icon icon-layers"></i> 人工智能</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=posts"><i class="icon icon-list"></i> 移动开发
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=comments"><i class="icon icon-speech"></i> 物联网
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="list-group user-nav">
+                    <li class="list-group-item">
+                        <a href="/user?method=favors"><i class="icon icon-heart"></i> 架构
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=follows"><i class="icon icon-user-following"></i> 云计算/大数据
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 互联网
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 游戏开发
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 运维
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 数据库
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 前端
+                        </a>
+                    </li><li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 后端
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 编程语言
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 研发管理
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 安全
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 程序人生
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 区块链
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 音视频研发
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 咨询
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 计算机理论与基础
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="list-group user-nav">
+                    <li class="list-group-item">
+                        <a href="/user?method=notifies">
+                            <i class="icon icon-envelope"></i> 通知
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="col-xs-12 col-md-10 side-right">
+        <div class="panel-heading">
+            <ul class="list-inline topic-filter">
+                <li data-toggle="tooltip" title="" data-original-title="发布时间排序">
+                    <a href="?order=" class="active">最近</a>
+                </li>
+                <li data-toggle="tooltip" title="" data-original-title="点赞数排序">
+                    <a href="?order=favors">投票</a>
+                </li>
+                <li data-toggle="tooltip" title="" data-original-title="评论次数排序">
+                    <a href="?order=comments">热门</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
         <div class="panel panel-default">
             <#list results.content as row>
                 <li class="list-group-item">
