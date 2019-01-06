@@ -3,8 +3,7 @@
 
 <form class="form" action="${base}/post/submit" method="post" enctype="multipart/form-data">
     <div class="row">
-        <div class="col-xs-12 col-md-8">
-            <div id="message"></div>
+        <div class="col-xs-12 col-md-9">
             <#if view??>
                 <input type="hidden" name="id" value="${view.id}"/>
                 <input type="hidden" name="authorId" value="${view.authorId}"/>
@@ -21,7 +20,7 @@
                 <#include "/default/channel/editor/ueditor.ftl"/>
             </div>
         </div>
-        <div class="col-xs-12 col-md-4 side-right">
+        <div class="col-xs-12 col-md-3 side-left">
 		    <div class="panel panel-default corner-radius help-box">
 		        <div class="panel-heading text-center">
 		            <h3 class="panel-title">构建高品质的社区</h3>
@@ -34,7 +33,7 @@
 		            </ul>
 		        </div>
 		    </div>
-		
+
 		    <div class="panel panel-default corner-radius help-box">
 		        <div class="panel-heading text-center">
 		            <h3 class="panel-title">在高质量优秀社区的我们</h3>
