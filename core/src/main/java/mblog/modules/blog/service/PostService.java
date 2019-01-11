@@ -31,7 +31,7 @@ public interface PostService {
 	 * @param channelId 分组Id
 	 * @param ord   排序
 	 */
-	Page<PostVO> paging(Pageable pageable, int channelId, Set<Integer> excludeChannelIds, String ord);
+	Page<PostVO> paging(Pageable pageable, int channelId, Set<Integer> excludeChannelIds, String ord,String blogClass);
 
 	Page<PostVO> paging4Admin(Pageable pageable, long id, String title, int channelId);
 	

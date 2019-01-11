@@ -47,6 +47,7 @@ public class ContentsDirective extends TemplateDirective {
         Integer pn = handler.getInteger("pn", 1);
         Integer channelId = handler.getInteger("channelId", 0);
         String order = handler.getString("order", Consts.order.NEWEST);
+        String blogClass=handler.getString("blogClass");//博客分类
         Integer size = handler.getInteger("size", 16);
 
         Set<Integer> excludeChannelIds = new HashSet<>();
@@ -59,7 +60,7 @@ public class ContentsDirective extends TemplateDirective {
         }
 
         Pageable pageable = new PageRequest(pn - 1, size);
-        Page<PostVO> result = postService.paging(pageable, channelId, excludeChannelIds, order);
+        Page<PostVO> result = postService.paging(pageable, channelId, excludeChannelIds, order,blogClass);
 
         handler.put(RESULTS, result).render();
     }

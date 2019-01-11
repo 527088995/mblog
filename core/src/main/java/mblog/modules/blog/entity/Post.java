@@ -48,16 +48,14 @@ public class Post implements Serializable {
 	 * 文章类型
 	 */
 	@Field
-	@NumericField
-	@Column(name = "article_type_id", length = 5)
-	private int articleTypeId;
+	@Column(name = "article_type_key", length = 64)
+	private String articleTypeKey;
 	/**
 	 * 博客分类
 	 */
 	@Field
-	@NumericField
-	@Column(name = "blog_class_id", length = 5)
-	private int blogClassId;
+	@Column(name = "blog_class_key", length = 64)
+	private String blogClassKey;
 
 	/**
 	 * 标题
@@ -136,20 +134,20 @@ public class Post implements Serializable {
 		return channelId;
 	}
 
-	public int getArticleTypeId() {
-		return articleTypeId;
+	public String getArticleTypeKey() {
+		return articleTypeKey;
 	}
 
-	public void setArticleTypeId(int articleTypeId) {
-		this.articleTypeId = articleTypeId;
+	public void setArticleTypeKey(String articleTypeKey) {
+		this.articleTypeKey = articleTypeKey;
 	}
 
-	public int getBlogClassId() {
-		return blogClassId;
+	public String getBlogClassKey() {
+		return blogClassKey;
 	}
 
-	public void setBlogClassId(int blogClassId) {
-		this.blogClassId = blogClassId;
+	public void setBlogClassKey(String blogClassKey) {
+		this.blogClassKey = blogClassKey;
 	}
 
 	public void setChannelId(int channelId) {

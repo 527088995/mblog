@@ -66,17 +66,17 @@
 	<div class="row" style="margin-left: 0px">
 		<div class="form-inline">
 		<span >文章类型：</span>
-			<select class="form-control"  name="articleTypeId"  data-required>
+			<select class="form-control"  name="articleTypeKey"  data-required>
 				<option value="">请选择文章类型</option>
 				<#list articleTypes as row>
-					<option value="${row.id}" <#if (view.articleTypeId == row.id)> selected </#if>>${row.name}</option>
+					<option value="${row.key}" <#if (view.articleTypeKey == row.key)> selected </#if>>${row.name}</option>
 				</#list>
 			</select>
 		<span>博客分类：</span>
-			<select class="form-control"  name="blogClassId"  data-required>
+			<select class="form-control"  name="blogClassKey"  data-required>
 				<option value="">请选择博客分类</option>
 				<#list blogClasss as row>
-					<option value="${row.id}" <#if (view.blogClassId == row.id)> selected </#if>>${row.name}</option>
+					<option value="${row.key}" <#if (view.blogClassKey== row.key)> selected </#if>>${row.name}</option>
 				</#list>
 			</select>
 		</div>

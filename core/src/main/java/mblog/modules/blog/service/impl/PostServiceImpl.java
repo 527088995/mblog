@@ -67,7 +67,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Cacheable
-	public Page<PostVO> paging(Pageable pageable, int channelId, Set<Integer> excludeChannelIds, String ord) {
+	public Page<PostVO> paging(Pageable pageable, int channelId, Set<Integer> excludeChannelIds, String ord,String blogClass) {
 		Page<Post> page = postDao.findAll((root, query, builder) -> {
 
 			List<Order> orders = new ArrayList<>();
@@ -80,12 +80,18 @@ public class PostServiceImpl implements PostService {
 				orders.add(builder.desc(root.<Long>get("weight")));
 			}
 			orders.add(builder.desc(root.<Long>get("created")));
+			//orders.add(builder.desc(root.<String>get("blogClass")));
 
 			Predicate predicate = builder.conjunction();
-
+			//博客类型
 			if (channelId > Consts.ZERO) {
 				predicate.getExpressions().add(
 						builder.equal(root.get("channelId").as(Integer.class), channelId));
+			}
+			//博客分类
+			if (null != blogClass && !blogClass.isEmpty()) {
+				predicate.getExpressions().add(
+						builder.equal(root.get("blogClassKey"), blogClass));
 			}
 
 			if (null != excludeChannelIds && !excludeChannelIds.isEmpty()) {

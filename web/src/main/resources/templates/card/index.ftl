@@ -1,85 +1,86 @@
 <#include "/default/utils/ui.ftl"/> <#assign topId = 1 /> <@layout>
-<@contents pn=pn order=order>
+<@contents pn=pn order=order blogClass=blogClass>
 <div class="row users-show streams">
     <div class="col-xs-12 col-md-2 side-left">
         <nav class="navbar navbar-default shadow-box background-white">
             <div id="home-navbar" class="collapse navbar-collapse">
                 <ul class="list-group user-nav first">
                     <li class="list-group-item">
-                        <a href="/user"><i class="icon icon-layers"></i> 人工智能</a>
+                        <a href="?blogClass=ai"><i class="icon icon-layers"></i> 人工智能</a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="/user?method=posts"><i class="icon icon-list"></i> 移动开发
+                    <li class="list-group-item" >
+                        <a href="?blogClass=mobile"><i class="icon icon-list"></i> 移动开发
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=comments"><i class="icon icon-speech"></i> 物联网
+                        <a href="?blogClass=iot"><i class="icon icon-speech"></i> 物联网
                         </a>
                     </li>
                 </ul>
 
                 <ul class="list-group user-nav">
                     <li class="list-group-item">
-                        <a href="/user?method=favors"><i class="icon icon-heart"></i> 架构
+                        <a href="?blogClass=arch"><i class="icon icon-heart"></i> 架构
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=follows"><i class="icon icon-user-following"></i> 云计算/大数据
+                        <a href="?blogClass=cloud"><i class="icon icon-user-following"></i> 云计算/大数据
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 互联网
+                        <a href="?blogClass=newest"><i class="icon icon-user-follow"></i> 互联网
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 游戏开发
+                        <a href="?blogClass=game"><i class="icon icon-user-follow"></i> 游戏开发
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 运维
+                        <a href="?blogClass=ops"><i class="icon icon-user-follow"></i> 运维
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 数据库
+                        <a href="?blogClass=db"><i class="icon icon-user-follow"></i> 数据库
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 前端
+                        <a href="?blogClass=web"><i class="icon icon-user-follow"></i> 前端
                         </a>
                     </li><li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 后端
+                        <a href="?blogClass=newest"><i class="icon icon-user-follow"></i> 后端
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 编程语言
+                        <a href="?blogClass=lang"><i class="icon icon-user-follow"></i> 编程语言
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 研发管理
+                        <a href="?blogClass=engineering"><i class="icon icon-user-follow"></i> 研发管理
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 安全
+                        <a href="?blogClass=sec"><i class="icon icon-user-follow"></i> 安全
+                        </a>
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="?blogClass=career"><i class="icon icon-user-follow"></i> 程序人生
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 程序人生
+                        <a href="?blogClass=blockchain"><i class="icon icon-user-follow"></i> 区块链
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 区块链
+                        <a href="?blogClass=avi"><i class="icon icon-user-follow"></i> 音视频研发
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 音视频研发
+                        <a href="?blogClass=hottest"><i class="icon icon-user-follow"></i> 咨询
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 咨询
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/user?method=fans"><i class="icon icon-user-follow"></i> 计算机理论与基础
+                        <a href="?blogClass=fund"><i class="icon icon-user-follow"></i> 计算机理论与基础
                         </a>
                     </li>
                 </ul>
@@ -98,7 +99,7 @@
         <div class="panel-heading">
             <ul class="list-inline topic-filter">
                 <li data-toggle="tooltip" title="" data-original-title="发布时间排序">
-                    <a href="?order=" class="active">最近</a>
+                    <a href="?order=newest" class="active">最近</a>
                 </li>
                 <li data-toggle="tooltip" title="" data-original-title="点赞数排序">
                     <a href="?order=favors">投票</a>
