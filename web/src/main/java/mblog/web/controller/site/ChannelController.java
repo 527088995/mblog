@@ -57,6 +57,8 @@ public class ChannelController extends BaseController {
 		model.put("channel", channel);
 		model.put("order", order);
 		model.put("pn", pn);
+		model.put("blogClasss", blogClassService.findAll(Consts.STATUS_NORMAL));//博客分类
+		model.put("articleTypes", articleTypeService.findAll(Consts.STATUS_NORMAL));
 		return view(Views.ROUTE_POST_INDEX);
 	}
 //	@RequestMapping("/blogClass/{id}")
