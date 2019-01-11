@@ -1456,3 +1456,51 @@ abbr[data-original-title], abbr[title] {
 .site-scroll-top:hover {
     background-position: 0 -46px;
 }
+
+/* Tablet (Portrait)
+================================================== */
+@media (min-width: 1600px) {
+    .container {
+        width: 1370px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .side-right {
+        padding: 0 15px 0 15px;
+        margin-left: 0;
+    }
+
+    .footer {
+        padding: 25px 10px;
+        text-align: center
+    }
+}
+
+/* Mobile (Portrait & Landscape)
+================================================== */
+@media only screen and (max-width: 767px) {
+    .side-right {
+        padding: 0 15px 0 15px;
+        margin-left: 0;
+    }
+
+    .footer {
+        padding: 15px 0 15px;
+        text-align: center
+    }
+
+    .topics-show .page-next {
+        text-align: left;
+    }
+}
+
+/* Mobile (Landscape)
+================================================== */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
+
+/* Mobile (Portrait only)
+================================================== */
+@media only screen and (max-width: 479px) {
+
+}
