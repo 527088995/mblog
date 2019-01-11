@@ -51,12 +51,14 @@ public class ChannelController extends BaseController {
 		// init params
 		String order = ServletRequestUtils.getStringParameter(request, "order", Consts.order.NEWEST);
 		int pn = ServletRequestUtils.getIntParameter(request, "pn", 1);
+		String blogClass=request.getParameter("blogClass");//匹配博客分类
 
 		Channel channel = channelService.getById(id);
 		// callback params
 		model.put("channel", channel);
 		model.put("order", order);
 		model.put("pn", pn);
+		model.put("blogClass", blogClass);//匹配博客分类
 		model.put("blogClasss", blogClassService.findAll(Consts.STATUS_NORMAL));//博客分类
 		model.put("articleTypes", articleTypeService.findAll(Consts.STATUS_NORMAL));
 		return view(Views.ROUTE_POST_INDEX);

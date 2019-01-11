@@ -39,8 +39,10 @@ public class IndexController extends BaseController{
 	public String root(ModelMap model, HttpServletRequest request) {
 		String order = ServletRequestUtils.getStringParameter(request, "order", Consts.order.NEWEST);
 		int pn = ServletRequestUtils.getIntParameter(request, "pn", 1);
+		String blogClass=request.getParameter("blogClass");//匹配博客分类
 
 		model.put("order", order);
+		model.put("blogClass", blogClass);//匹配博客分类
 		model.put("pn", pn);
 		model.put("blogClasss", blogClassService.findAll(Consts.STATUS_NORMAL));//博客分类
 		model.put("articleTypes", articleTypeService.findAll(Consts.STATUS_NORMAL));

@@ -1,5 +1,5 @@
 <#include "/default/utils/ui.ftl"/> <#assign topId = 1 /> <@layout>
-<@contents pn=pn order=order>
+<@contents pn=pn order=order blogClass=blogClass>
 <div class="row users-show streams">
     <div class="col-xs-12 col-md-2 side-left">
         <nav class="navbar navbar-default shadow-box background-white">
