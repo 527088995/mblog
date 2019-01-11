@@ -1,5 +1,5 @@
 <#include "/default/utils/ui.ftl"/> <#assign topId = 1 /> <@layout>
-<@contents pn=pn order=order blogClass=blogClass>
+<@contents pn=pn order=order>
 <div class="row users-show streams">
     <div class="col-xs-12 col-md-2 side-left">
         <nav class="navbar navbar-default shadow-box background-white">
@@ -84,14 +84,13 @@
                         </a>
                     </li>
                 </ul>
-
-                <ul class="list-group user-nav">
-                    <li class="list-group-item">
-                        <a href="/user?method=notifies">
-                            <i class="icon icon-envelope"></i> 通知
-                        </a>
-                    </li>
-                </ul>
+                <#--<ul class="list-group user-nav">-->
+                    <#--<li class="list-group-item">-->
+                        <#--<a href="/user?method=notifies">-->
+                            <#--<i class="icon icon-envelope"></i> 通知-->
+                        <#--</a>-->
+                    <#--</li>-->
+                <#--</ul>-->
             </div>
         </nav>
     </div>
@@ -124,7 +123,10 @@
                     <div class="info-box d-flex align-content-center">
                         <a class="reply_last_time hidden-xs meta" style="float: left;margin-left: 0px;padding-left: 0px;"
                            href="${base}/users/${row.authorId}"> <span style="color: #3d3d3d;">${row.authorName}</span> ⋅
-                            <span>${row.tags} ⋅ </span> <span class="timeago">${timeAgo(row.created)}</span>
+                            <#list blogClasss as view>
+                                <#if ( row.blogClassKey==view.key)><span >${view.name} ⋅ </span></#if>
+                            </#list>
+                            <span class="timeago">${timeAgo(row.created)}</span>
                         </a>
                         <a class="reply_last_time hidden-xs meta"
                             href="${base}/view/${row.id}"> <span style="color: #3399ea;">${row.views}</span>
