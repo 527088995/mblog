@@ -4,19 +4,17 @@
     <div class="col-xs-12 col-md-2 side-left">
         <nav class="navbar navbar-default shadow-box background-white">
             <div id="home-navbar" class="collapse navbar-collapse">
-                <#--<ul class="list-group user-nav first">-->
-                    <#--<li class="list-group-item">-->
-                        <#--<a href="?blogClass=ai"><i class="icon icon-layers"></i> 人工智能</a>-->
-                    <#--</li>-->
-                    <#--<li class="list-group-item" >-->
-                        <#--<a href="?blogClass=mobile"><i class="icon icon-list"></i> 移动开发-->
-                        <#--</a>-->
-                    <#--</li>-->
-                    <#--<li class="list-group-item">-->
-                        <#--<a href="?blogClass=iot"><i class="icon icon-speech"></i> 物联网-->
-                        <#--</a>-->
-                    <#--</li>-->
-                <#--</ul>-->
+                <ul class="list-group user-nav first">
+                    <li class="list-group-item">
+                        <a href="?order=newest"><i class="icon icon-list"></i> 最近</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="?order=favors"><i class="icon icon-speech"></i> 投票 </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="?order=comments"><i class="icon icon-heart"></i> 热门</a>
+                    </li>
+                </ul>
 
                 <ul class="list-group user-nav">
                     <#list blogClasss as view>
@@ -31,20 +29,20 @@
         </nav>
     </div>
     <div class="col-xs-12 col-md-10 side-right">
-        <div class="panel-heading">
-            <ul class="list-inline topic-filter">
-                <li data-toggle="tooltip" title="" data-original-title="发布时间排序">
-                    <a href="?order=newest" class="active">最近</a>
-                </li>
-                <li data-toggle="tooltip" title="" data-original-title="点赞数排序">
-                    <a href="?order=favors">投票</a>
-                </li>
-                <li data-toggle="tooltip" title="" data-original-title="评论次数排序">
-                    <a href="?order=comments">热门</a>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
-        </div>
+        <#--<div class="panel-heading">-->
+            <#--<ul class="list-inline topic-filter">-->
+                <#--<li data-toggle="tooltip" title="" data-original-title="发布时间排序">-->
+                    <#--<a href="?order=newest" class="active">最近</a>-->
+                <#--</li>-->
+                <#--<li data-toggle="tooltip" title="" data-original-title="点赞数排序">-->
+                    <#--<a href="?order=favors">投票</a>-->
+                <#--</li>-->
+                <#--<li data-toggle="tooltip" title="" data-original-title="评论次数排序">-->
+                    <#--<a href="?order=comments">热门</a>-->
+                <#--</li>-->
+            <#--</ul>-->
+            <#--<div class="clearfix"></div>-->
+        <#--</div>-->
         <div class="panel panel-default">
             <#list results.content as row>
                 <li class="list-group-item">
