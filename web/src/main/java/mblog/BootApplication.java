@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * SprintBootApplication
  */
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
 public class BootApplication extends SpringBootServletInitializer {
 
