@@ -13,7 +13,7 @@ public class TestTask1 {
     @Autowired
     private ArticleService articleService;
 
-    @Scheduled(cron="* */1 * * * ?")
+    //@Scheduled(cron="* */1 * * * ?")
     private void process(){
         Article article=new Article();
         articleService.save(article);
