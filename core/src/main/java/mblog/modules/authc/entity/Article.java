@@ -2,6 +2,8 @@ package mblog.modules.authc.entity;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.search.annotations.NumericField;
+import org.hibernate.search.annotations.SortableField;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +22,9 @@ public class Article  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @SortableField
+    @NumericField
+    private long id;
 	/**
 	 * 文章链接的相对地址
 	 */
@@ -52,13 +56,25 @@ public class Article  implements Serializable {
     @Column(name = "comment_num")
     private int commentNum;
 
+    @Column(name = "type")
     private  String type;
 
-    public int getId() {
+    @Column(name = "status")
+    private  int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

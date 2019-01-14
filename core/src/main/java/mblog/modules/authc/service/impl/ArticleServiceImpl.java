@@ -3,6 +3,9 @@ package mblog.modules.authc.service.impl;
 import mblog.modules.authc.dao.ArticleDao;
 import mblog.modules.authc.entity.Article;
 import mblog.modules.authc.service.ArticleService;
+import mblog.modules.blog.data.PostVO;
+import mblog.modules.blog.service.PostService;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
@@ -18,11 +21,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 @Service
-//@Transactional
+@Transactional
 public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleDao articleDao;
+    @Autowired
+    private PostService postService;
 
     private static final String URL = "https://www.csdn.net/nav/other";
 
@@ -36,7 +41,55 @@ public class ArticleServiceImpl implements ArticleService {
         }
         return 1;
     }
+    @Override
+    @Transactional
+    public long saveMpost(){
+        List<Article> articleList=articleDao.findTop100ByTypeAndStatus("career",0);
+        for(Article article:articleList){
+            String concent= null;
+            try {
+                concent = this.searchPsotUrl(article.getAddress());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            PostVO post=new PostVO();
+            post.setContent(concent);
+            post.setArticleTypeKey("reprint");
+            post.setBlogClassKey("career");
+            post.setTitle(article.getTitle());
+            post.setAuthorId(1);
+            post.setAuthorName("csdnUser");
+            postService.post(post);
+            articleDao.updateStatus(article.getId(),1);
+        }
+        return 1;
+    };
 
+    public String searchPsotUrl(String postUrl) throws IOException {
+
+        //获取url地址的http链接Connection
+        Connection conn = Jsoup.connect(postUrl)	//博客首页的url地址
+                .userAgent("Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10")	//http请求的浏览器设置
+                .timeout(1000)   //http连接时长
+                .method(Connection.Method.GET);  //请求类型是get请求，http请求还是post,delete等方式
+        //获取页面的html文档
+        Document doc = conn.get();
+        Element body = doc.body();
+
+        //将爬取出来的文章封装到Artcle中，并放到ArrayList里面去
+        List<Article> resultList = new ArrayList<Article>(100);
+
+        Element articleListDiv = body.getElementById("content_views");
+        String html=articleListDiv.outerHtml();
+        html+= "<br/>注意：本文归作者所有，未经作者允许，不得转载"+"<br/>作者原文链接:"+"<a href=\""+postUrl+"></a>"+postUrl;
+
+        //遍历输出ArrayList里面的爬取到的文章
+        System.out.println("文章总数:" + resultList.size());
+//        for(Article article : resultList) {
+//            System.out.println("文章绝对路劲地址:http://blog.csdn.net" + article.getAddress());
+//        }
+        return html;
+    }
     public void searchUrl() throws IOException {
 
         //获取url地址的http链接Connection
