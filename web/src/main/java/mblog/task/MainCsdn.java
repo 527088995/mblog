@@ -17,7 +17,7 @@ import org.jsoup.select.Elements;
  * @author shizongger
  * @date 2017/02/09
  */
-public class Main2 {
+public class MainCsdn {
 
     //需要进行爬取得博客首页
 //	private static final String URL = "http://blog.csdn.net/guolin_blog";
