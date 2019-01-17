@@ -10,6 +10,8 @@
 package mblog.web.controller.site;
 
 import mblog.base.lang.Consts;
+import mblog.modules.authc.entity.Monitor;
+import mblog.modules.authc.service.MonitorService;
 import mblog.modules.blog.data.PostVO;
 import mblog.modules.blog.entity.Channel;
 import mblog.modules.blog.entity.BlogClass;
@@ -18,6 +20,7 @@ import mblog.modules.blog.service.ChannelService;
 import mblog.modules.blog.service.BlogClassService;
 import mblog.modules.blog.service.ArticleTypeService;
 import mblog.modules.blog.service.PostService;
+import mblog.modules.user.data.AccountProfile;
 import mblog.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +47,9 @@ public class ChannelController extends BaseController {
 	private ArticleTypeService articleTypeService;
 	@Autowired
 	private PostService postService;
+	@Autowired
+	private MonitorService monitorService;
+
 	
 	@RequestMapping("/channel/{id}")
 	public String channel(@PathVariable Integer id, ModelMap model,
@@ -63,43 +69,28 @@ public class ChannelController extends BaseController {
 		model.put("articleTypes", articleTypeService.findAll(Consts.STATUS_NORMAL));
 		return view(Views.ROUTE_POST_INDEX);
 	}
-//	@RequestMapping("/blogClass/{id}")
-//	public String blogClass(@PathVariable Integer id, ModelMap model,
-//						  HttpServletRequest request) {
-//		// init params
-//		String order = ServletRequestUtils.getStringParameter(request, "order", Consts.order.NEWEST);
-//		int pn = ServletRequestUtils.getIntParameter(request, "pn", 1);
-//
-//		BlogClass blogClass = blogClassService.getById(id);
-//		// callback params
-//		model.put("blogClass", blogClass);
-//		model.put("order", order);
-//		model.put("pn", pn);
-//		return view(Views.ROUTE_POST_INDEX);
-//	}
-//	@RequestMapping("/articleType/{id}")
-//	public String articleType(@PathVariable Integer id, ModelMap model,
-//						  HttpServletRequest request) {
-//		// init params
-//		String order = ServletRequestUtils.getStringParameter(request, "order", Consts.order.NEWEST);
-//		int pn = ServletRequestUtils.getIntParameter(request, "pn", 1);
-//
-//		ArticleType articleType = articleTypeService.getById(id);
-//		// callback params
-//		model.put("articleType", articleType);
-//		model.put("order", order);
-//		model.put("pn", pn);
-//		return view(Views.ROUTE_POST_INDEX);
-//	}
 
 	@RequestMapping("/view/{id}")
-	public String view(@PathVariable Long id, ModelMap model) {
+	public String view(@PathVariable Long id, ModelMap model, HttpServletRequest request) {
 		PostVO view = postService.get(id);
 
 		Assert.notNull(view, "该文章已被删除");
 
 		postService.identityViews(id);
+		monitorReadIp(request,id);
 		model.put("view", view);
 		return view(Views.ROUTE_POST_VIEW);
+	}
+
+	public  void monitorReadIp(HttpServletRequest request,Long id){
+		Monitor monitor=new Monitor();
+		String ipAddress = request.getRemoteAddr();//记录每篇文章访问的ip
+		monitor.setIp(ipAddress);
+		monitor.setPostId(id);
+		AccountProfile profile = (AccountProfile) session.getAttribute("profile");
+		if (profile != null && profile.getBadgesCount() != null) {
+			monitor.setUserId(profile.getId());
+		}
+		monitorService.saveMonitor(monitor);
 	}
 }
