@@ -26,22 +26,29 @@ public class Main3 {
 
     public static void main(String[] args) throws IOException {
 
+        String num="1.6K";
+        if(num.contains("K")){
+            String rNum=num.replaceAll("K","");
+            float readNum=Float.parseFloat(rNum);
+            double readNums=readNum*1000;
+            System.out.println("文章总数:" + readNums);
+        }
         //获取url地址的http链接Connection
-        Connection conn = Jsoup.connect(URL)	//博客首页的url地址
-                .userAgent("Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10")	//http请求的浏览器设置
-                .timeout(1000)   //http连接时长
-                .method(Connection.Method.GET);  //请求类型是get请求，http请求还是post,delete等方式
-        //获取页面的html文档
-        Document doc = conn.get();
-        Element body = doc.body();
-
-        //将爬取出来的文章封装到Artcle中，并放到ArrayList里面去
-        List<Article> resultList = new ArrayList<Article>(100);
-
-        Element articleListDiv = body.getElementById("recommendArticleList");
-        String test=articleListDiv.attributes().get("shown-offset");
-        Post post = new Post();
-        post.setSummary(articleListDiv.html());
+//        Connection conn = Jsoup.connect(URL)	//博客首页的url地址
+//                .userAgent("Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10")	//http请求的浏览器设置
+//                .timeout(1000)   //http连接时长
+//                .method(Connection.Method.GET);  //请求类型是get请求，http请求还是post,delete等方式
+//        //获取页面的html文档
+//        Document doc = conn.get();
+//        Element body = doc.body();
+//
+//        //将爬取出来的文章封装到Artcle中，并放到ArrayList里面去
+//        List<Article> resultList = new ArrayList<Article>(100);
+//
+//        Element articleListDiv = body.getElementById("recommendArticleList");
+//        String test=articleListDiv.attributes().get("shown-offset");
+//        Post post = new Post();
+//        post.setSummary(articleListDiv.html());
 
 //        Elements articleList = articleListDiv.getElementsByClass("clearfix");
 //        for(Element article : articleList){
@@ -65,10 +72,10 @@ public class Main3 {
 //        }
 
         //遍历输出ArrayList里面的爬取到的文章
-        System.out.println("文章总数:" + resultList.size());
-        for(Article article : resultList) {
-            System.out.println("文章绝对路劲地址:http://blog.csdn.net" + article.getAddress());
-        }
+//        System.out.println("文章总数:" + resultList.size());
+//        for(Article article : resultList) {
+//            System.out.println("文章绝对路劲地址:http://blog.csdn.net" + article.getAddress());
+//        }
     }
 
 }

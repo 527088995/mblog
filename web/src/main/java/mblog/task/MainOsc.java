@@ -46,7 +46,7 @@ public class MainOsc {
             //文章简介
             Element desptionNode = (article.getElementsByClass("line-clamp")).get(0);
             //Element articleManageNode = (article.getElementsByClass("time")).get(0);
-            Element readNum = (article.getElementsByClass("eye icon")).get(0);
+            String readNum = (article.getElementsByClass("item")).get(3).text();
             Element commentNum = (article.getElementsByClass("item")).get(4);
 
             articleEntity.setAddress(linkNode.attr("href"));
@@ -54,10 +54,10 @@ public class MainOsc {
             articleEntity.setDesption(desptionNode.text());
            // articleEntity.setTime(articleManageNode.select("span:eq(0").text());
             //阅读量
-            if("".equals(readNum.text())){
+            if(readNum.contains("K")){
                 articleEntity.setReadNum(0);
             }else {
-                articleEntity.setReadNum(Integer.parseInt(readNum.text()));
+                articleEntity.setReadNum(Integer.parseInt(readNum));
             }
             //评论
             if("".equals(commentNum.text())){
