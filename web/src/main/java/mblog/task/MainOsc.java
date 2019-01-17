@@ -47,14 +47,24 @@ public class MainOsc {
             Element desptionNode = (article.getElementsByClass("line-clamp")).get(0);
             //Element articleManageNode = (article.getElementsByClass("time")).get(0);
             Element readNum = (article.getElementsByClass("eye icon")).get(0);
-            Element commentNum = (article.getElementsByClass("comment outline icon ")).get(0);
+            Element commentNum = (article.getElementsByClass("item")).get(4);
 
             articleEntity.setAddress(linkNode.attr("href"));
             articleEntity.setTitle(linkNode.text());
             articleEntity.setDesption(desptionNode.text());
            // articleEntity.setTime(articleManageNode.select("span:eq(0").text());
-            articleEntity.setReadNum(Integer.parseInt(readNum.getElementsByClass("num").text()));
-            articleEntity.setCommentNum(Integer.parseInt(commentNum.getElementsByClass("num").text()));
+            //阅读量
+            if("".equals(readNum.text())){
+                articleEntity.setReadNum(0);
+            }else {
+                articleEntity.setReadNum(Integer.parseInt(readNum.text()));
+            }
+            //评论
+            if("".equals(commentNum.text())){
+                articleEntity.setCommentNum(0);
+            }else {
+                articleEntity.setCommentNum(Integer.parseInt(commentNum.text()));
+            }
 
             resultList.add(articleEntity);
         }
