@@ -19,7 +19,7 @@ import org.jsoup.select.Elements;
  */
 public class MainCsdn {
 
-    //需要进行爬取得博客首页
+    //需要进行爬取得博客首页q1
 //	private static final String URL = "http://blog.csdn.net/guolin_blog";
     private static final String URL = "https://blog.csdn.net/nav/cloud";
 

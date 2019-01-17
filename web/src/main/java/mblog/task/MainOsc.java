@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class MainOsc {
 
-    //需要进行爬取得博客首页
+    //需要进行爬取得博客首页qq
 //	private static final String URL = "http://blog.csdn.net/guolin_blog";
     private static final String URL = "https://www.oschina.net/blog?classification=428609";
 
