@@ -86,7 +86,7 @@ public class ChannelController extends BaseController {
 	public  void monitorReadIp(HttpServletRequest request,Long id){
 		Monitor monitor=new Monitor();
 		String ipAddress = request.getRemoteAddr();//记录每篇文章访问的ip
-		// json_result用于接收返回的json数据2
+		// json_result用于接收返回的json数据1
 		String json_result = null;
 		try {
 			json_result = AddressUtils.getAddresses("ip=" + ipAddress, "utf-8");
