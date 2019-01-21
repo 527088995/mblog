@@ -24,8 +24,14 @@ public class ViewCopyrightPugin implements ChannelControllerHook.ChannelControll
         PostVO ret = (PostVO) modelAndView.getModelMap().get("view");
         if (ret != null) {
             String content = ret.getContent();
-            if (!content.contains("本文归作者所有，未经作者允许，不得转载")) {
-                content += "<br/>注意：本文归作者所有，未经作者允许，不得转载";
+            if(content!=null){
+                if (!content.contains("本文归作者所有，未经作者允许，不得转载")) {
+                    content += "<br/>注意：本文归作者所有，未经作者允许，不得转载";
+                    ret.setContent(content);
+                }
+            }else {
+                //抓取文章存在问题时，内容不存在
+                content = "<br/>注意：本文丢掉了！抱歉 -_- !";
                 ret.setContent(content);
             }
         }
