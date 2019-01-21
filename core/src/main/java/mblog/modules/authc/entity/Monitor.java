@@ -54,6 +54,8 @@ public class Monitor implements Serializable {
 
     private String isp;
 
+    private String ipjson;
+
     public long getId() {
         return id;
     }
@@ -116,5 +118,13 @@ public class Monitor implements Serializable {
 
     public void setIsp(String isp) {
         this.isp = isp;
+    }
+
+    public String getIpjson() {
+        return ipjson;
+    }
+
+    public void setIpjson(String ipjson) {
+        this.ipjson = ipjson;
     }
 }
