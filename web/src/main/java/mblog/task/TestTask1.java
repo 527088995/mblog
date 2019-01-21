@@ -16,7 +16,7 @@ public class TestTask1 {
     //@Scheduled(cron="* */1 * * * ?")
     private void process(){
         Article article=new Article();
-        articleService.save(article);
+        articleService.save();
         System.out.println("[" + Thread.currentThread().getName() + "]" + "this is scheduler task runing  "+(count++));
     }
 }
