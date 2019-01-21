@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ArticleDao extends JpaRepository<Article, Long>, JpaSpecificationExecutor<Article> {
 
-    List<Article> findTop100ByStatus(int status);
+    List<Article> findTop100ByBlogTypeAndStatus(String blogFrom,int status);
 
     @Modifying
     @Query("update Article set status = :status where id = :id")

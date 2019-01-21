@@ -5,9 +5,7 @@ import mblog.modules.authc.entity.Article;
 import mblog.modules.authc.service.ArticleService;
 import mblog.modules.blog.data.PostVO;
 import mblog.modules.blog.service.PostService;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
@@ -35,7 +33,7 @@ public class ArticleServiceImpl implements ArticleService {
     //@Transactional
     public long save(){
         try {
-            this.saveOSC();
+            this.searchCsdnUrl();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,7 +42,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     @Transactional
     public long saveMpost(){
-        List<Article> articleList=articleDao.findTop100ByStatus(0);
+
+        List<Article> articleList=articleDao.findTop100ByBlogTypeAndStatus("CSDN",0);
         for(Article article:articleList){
             String concent= null;
             try {
@@ -91,7 +90,7 @@ public class ArticleServiceImpl implements ArticleService {
         return html;
     }
 
-    public void searchUrl() throws IOException {
+    public void searchCsdnUrl() throws IOException {
 //        String[] Arr = {"ai","cloud", "db","career","game", "engineering","web",
 //                "mobile", "iot","ops","fund", "lang", "arch", "avi", "sec","other"};
         List<String> urlList=new ArrayList<>();
@@ -144,6 +143,8 @@ public class ArticleServiceImpl implements ArticleService {
                 }
                 articleEntity.setStatus(0);
                 articleEntity.setType(type);
+                articleEntity.setTime(new Date());
+                articleEntity.setBlogType("CSDN");
                 if(articleEntity.getReadNum()>1400){
                     articleDao.save(articleEntity);
                 }
@@ -238,7 +239,7 @@ public class ArticleServiceImpl implements ArticleService {
                 if("430381".equals(type)){articleEntity.setType("other");}
                 if("428638".equals(type)){articleEntity.setType("arch");}
                 articleEntity.setTime(new Date());
-                articleEntity.setBlogFrom("OSC");
+                articleEntity.setBlogType("OSC");
                 articleEntity.setStatus(0);
                 if(articleEntity.getReadNum()>300){
                     articleDao.save(articleEntity);
