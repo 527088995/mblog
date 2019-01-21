@@ -13,10 +13,10 @@ public class TestTask1 {
     @Autowired
     private ArticleService articleService;
 
-    //@Scheduled(cron="* */1 * * * ?")
+    //@Scheduled(cron="* */2 * * * ?")
     private void process(){
-        Article article=new Article();
-        articleService.save();
+        //Article article=new Article();
+        articleService.saveOsc();
         System.out.println("[" + Thread.currentThread().getName() + "]" + "this is scheduler task runing  "+(count++));
     }
 }
