@@ -50,6 +50,10 @@ public class Monitor implements Serializable {
     @Column(name = "modified_time")
     private Date modifiedTime;
 
+    private String address;
+
+    private String isp;
+
     public long getId() {
         return id;
     }
@@ -96,5 +100,21 @@ public class Monitor implements Serializable {
 
     public void setPostId(long postId) {
         this.postId = postId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getIsp() {
+        return isp;
+    }
+
+    public void setIsp(String isp) {
+        this.isp = isp;
     }
 }
