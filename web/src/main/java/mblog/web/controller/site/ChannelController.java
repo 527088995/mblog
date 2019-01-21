@@ -9,19 +9,19 @@
 */
 package mblog.web.controller.site;
 
+import com.alibaba.fastjson.JSONObject;
 import mblog.base.lang.Consts;
 import mblog.modules.authc.entity.Monitor;
 import mblog.modules.authc.service.MonitorService;
 import mblog.modules.blog.data.PostVO;
 import mblog.modules.blog.entity.Channel;
-import mblog.modules.blog.entity.BlogClass;
-import mblog.modules.blog.entity.ArticleType;
 import mblog.modules.blog.service.ChannelService;
 import mblog.modules.blog.service.BlogClassService;
 import mblog.modules.blog.service.ArticleTypeService;
 import mblog.modules.blog.service.PostService;
 import mblog.modules.user.data.AccountProfile;
 import mblog.web.controller.BaseController;
+import mblog.web.controller.site.util.AddressUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Channel 主页
@@ -85,8 +86,39 @@ public class ChannelController extends BaseController {
 	public  void monitorReadIp(HttpServletRequest request,Long id){
 		Monitor monitor=new Monitor();
 		String ipAddress = request.getRemoteAddr();//记录每篇文章访问的ip
+		// json_result用于接收返回的json数据
+		String json_result = null;
+		try {
+			json_result = AddressUtils.getAddresses("ip=" + ipAddress, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		JSONObject json = JSONObject.parseObject(json_result).getJSONObject("data");
+		System.out.println("json数据： " + json);
+		String country = json.get("country").toString();
+		String region = json.get("region").toString();
+		String city = json.get("city").toString();
+		String county = json.get("county").toString();
+		String isp = json.get("isp").toString();
+		String area = json.get("area").toString();
+		System.out.println("国家： " + country);
+		System.out.println("地区： " + area);
+		System.out.println("省份: " + region);
+		System.out.println("城市： " + city);
+		System.out.println("区/县： " + county);
+		System.out.println("互联网服务提供商： " + isp);
+
+		String address = country + "/";
+		address += region + "/";
+		address += city + "/";
+		//address += county;
+		System.out.println(address);
+
+
 		monitor.setIp(ipAddress);
 		monitor.setPostId(id);
+		monitor.setAddress(address);
+		monitor.setIsp(isp);
 		AccountProfile profile = (AccountProfile) session.getAttribute("profile");
 		if (profile != null && profile.getBadgesCount() != null) {
 			monitor.setUserId(profile.getId());
