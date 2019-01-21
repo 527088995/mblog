@@ -1,9 +1,5 @@
 package mblog.task;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import mblog.modules.authc.entity.Article;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -11,17 +7,21 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * java爬取csdn博客的简单的案例，如果你只爬取某个博主的首页文章，那么参考本程序员
  * 如果你想爬取某位博主的所有文章，请参考Main.java
  * @author shizongger
  * @date 2017/02/09
  */
-public class Main2 {
+public class MainOsc {
 
-    //需要进行爬取得博客首页
+    //需要进行爬取得博客首页qq
 //	private static final String URL = "http://blog.csdn.net/guolin_blog";
-    private static final String URL = "https://blog.csdn.net/nav/cloud";
+    private static final String URL = "https://www.oschina.net/blog?classification=428609";
 
     public static void main(String[] args) throws IOException {
 
@@ -37,24 +37,34 @@ public class Main2 {
         //将爬取出来的文章封装到Artcle中，并放到ArrayList里面去
         List<Article> resultList = new ArrayList<Article>(100);
 
-        Element articleListDiv = body.getElementById("feedlist_id");
-        Elements articleList = articleListDiv.getElementsByClass("clearfix");
+        Element articleListDiv = body.getElementById("recommendArticleList");
+        Elements articleList = articleListDiv.getElementsByClass("item blog-item");
         for(Element article : articleList){
             Article articleEntity = new Article();
             //标题
-            Element linkNode = (article.select("div h2 a")).get(0);
+            Element linkNode = (article.select("div a")).get(0);
             //文章简介
-            Element desptionNode = (article.getElementsByClass("summary oneline")).get(0);
-            Element articleManageNode = (article.getElementsByClass("time")).get(0);
-            Element readNum = (article.getElementsByClass("read_num")).get(0);
-            Element commentNum = (article.getElementsByClass("common_num ")).get(0);
+            Element desptionNode = (article.getElementsByClass("line-clamp")).get(0);
+            //Element articleManageNode = (article.getElementsByClass("time")).get(0);
+            String readNum = (article.getElementsByClass("item")).get(3).text();
+            Element commentNum = (article.getElementsByClass("item")).get(4);
 
             articleEntity.setAddress(linkNode.attr("href"));
             articleEntity.setTitle(linkNode.text());
             articleEntity.setDesption(desptionNode.text());
            // articleEntity.setTime(articleManageNode.select("span:eq(0").text());
-            articleEntity.setReadNum(Integer.parseInt(readNum.getElementsByClass("num").text()));
-            articleEntity.setCommentNum(Integer.parseInt(commentNum.getElementsByClass("num").text()));
+            //阅读量
+            if(readNum.contains("K")){
+                articleEntity.setReadNum(0);
+            }else {
+                articleEntity.setReadNum(Integer.parseInt(readNum));
+            }
+            //评论
+            if("".equals(commentNum.text())){
+                articleEntity.setCommentNum(0);
+            }else {
+                articleEntity.setCommentNum(Integer.parseInt(commentNum.text()));
+            }
 
             resultList.add(articleEntity);
         }

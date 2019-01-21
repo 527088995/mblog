@@ -62,6 +62,9 @@ public class Article  implements Serializable {
     @Column(name = "status")
     private  int status;
 
+    @Column(name = "blog_from")
+    private  String blogFrom;
+
     public int getStatus() {
         return status;
     }
@@ -132,5 +135,13 @@ public class Article  implements Serializable {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getBlogFrom() {
+        return blogFrom;
+    }
+
+    public void setBlogFrom(String blogFrom) {
+        this.blogFrom = blogFrom;
     }
 }
