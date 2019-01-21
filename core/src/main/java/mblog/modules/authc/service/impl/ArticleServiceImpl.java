@@ -42,7 +42,6 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     @Transactional
     public long saveMpost(){
-
         List<Article> articleList=articleDao.findTop100ByBlogTypeAndStatus("CSDN",0);
         for(Article article:articleList){
             String concent= null;
@@ -52,9 +51,9 @@ public class ArticleServiceImpl implements ArticleService {
                 e.printStackTrace();
             }
             PostVO post=new PostVO();
-            post.setContent(concent);
-            post.setArticleTypeKey("reprint");
-            post.setBlogClassKey(article.getType());
+            post.setContent(concent);//内容
+            post.setArticleTypeKey("reprint");//转载
+            post.setBlogClassKey(article.getType());//博客分类
             post.setTitle(article.getTitle());
             post.setAuthorId(1);
             post.setChannelId(2);
@@ -81,6 +80,55 @@ public class ArticleServiceImpl implements ArticleService {
         String html="<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<body>"+articleListDiv.outerHtml();
+        html+= "<br/>作者原文链接:"+"<p><a href=\""+postUrl+"\" target=\"_blank\" rel=\"noopener\">"+postUrl+"</a></p>\n" +
+                "</body>\n" +
+                "</html>";
+        //遍历输出ArrayList里面的爬取到的文章
+        System.out.println("文章总数:" + postUrl);
+
+        return html;
+    }
+    @Override
+    @Transactional
+    public long saveOsc(){
+        List<Article> articleList=articleDao.findTop100ByBlogTypeAndStatus("OSC",0);
+        for(Article article:articleList){
+            String concent= null;
+            try {
+                concent = this.searchOscUrl(article.getAddress());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            PostVO post=new PostVO();
+            post.setContent(concent);//内容
+            post.setArticleTypeKey("reprint");//转载
+            post.setBlogClassKey(article.getType());//博客分类
+            post.setTitle(article.getTitle());
+            post.setAuthorId(11);
+            post.setChannelId(2);
+            post.setBlogType("OSC");
+            post.setAuthorName("oscUser");
+            postService.post(post);
+            articleDao.updateStatus(article.getId(),1);
+        }
+        return 1;
+    };
+    public String searchOscUrl(String postUrl) throws IOException {
+
+        //获取url地址的http链接Connection
+        Connection conn = Jsoup.connect(postUrl)	//博客首页的url地址
+                .userAgent("Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10")	//http请求的浏览器设置
+                .timeout(1000)   //http连接时长
+                .method(Connection.Method.GET);  //请求类型是get请求，http请求还是post,delete等方式
+        //获取页面的html文档
+        Document doc = conn.get();
+        Element body = doc.body();
+        //将爬取出来的文章封装到Artcle中，并放到ArrayList里面去
+        Elements articleListDiv = body.getElementById("articleContent").children();
+        articleListDiv.remove(0);
+        String html="<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<body>"+"<div class=\"htmledit_views\" id=\"content_views\"> "+articleListDiv.outerHtml()+"</div>";
         html+= "<br/>作者原文链接:"+"<p><a href=\""+postUrl+"\" target=\"_blank\" rel=\"noopener\">"+postUrl+"</a></p>\n" +
                 "</body>\n" +
                 "</html>";
