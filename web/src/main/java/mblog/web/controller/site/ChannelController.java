@@ -119,6 +119,7 @@ public class ChannelController extends BaseController {
 		monitor.setPostId(id);
 		monitor.setAddress(address);
 		monitor.setIsp(isp);
+		monitor.setIpjson(json_result);
 		AccountProfile profile = (AccountProfile) session.getAttribute("profile");
 		if (profile != null && profile.getBadgesCount() != null) {
 			monitor.setUserId(profile.getId());
