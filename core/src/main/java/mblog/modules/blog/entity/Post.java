@@ -57,6 +57,9 @@ public class Post implements Serializable {
 	@Column(name = "blog_class_key", length = 64)
 	private String blogClassKey;
 
+	@Column(name = "blog_type")
+	private String blogType;
+
 	/**
 	 * 标题
 	 */
@@ -256,5 +259,13 @@ public class Post implements Serializable {
 
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+
+	public String getBlogType() {
+		return blogType;
+	}
+
+	public void setBlogType(String blogType) {
+		this.blogType = blogType;
 	}
 }
