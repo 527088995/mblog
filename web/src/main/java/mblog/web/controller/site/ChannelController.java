@@ -89,32 +89,40 @@ public class ChannelController extends BaseController {
 		// json_result用于接收返回的json数据1
 		String json_result = null;
 		try {
+			if("127.0.0.1".equals(ipAddress)){
+				ipAddress="60.209.29.59";
+			}
 			json_result = AddressUtils.getAddresses("ip=" + ipAddress, "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		JSONObject json = JSONObject.parseObject(json_result).getJSONObject("data");
-		System.out.println("json数据： " + json);
-		String country = json.get("country").toString();
-		String region = json.get("region").toString();
-		String city = json.get("city").toString();
-		String county = json.get("county").toString();
-		String isp = json.get("isp").toString();
-		String area = json.get("area").toString();
-		System.out.println("国家： " + country);
-		System.out.println("地区： " + area);
-		System.out.println("省份: " + region);
-		System.out.println("城市： " + city);
-		System.out.println("区/县： " + county);
-		System.out.println("互联网服务提供商： " + isp);
+		String address=null;
+		String isp=null;
+		if(json_result!=null){
+			JSONObject json = JSONObject.parseObject(json_result).getJSONObject("data");
+			System.out.println("json数据： " + json);
+			String country = json.get("country").toString();
+			String region = json.get("region").toString();
+			String city = json.get("city").toString();
+			String county = json.get("county").toString();
+			isp = json.get("isp").toString();
+			String area = json.get("area").toString();
+			System.out.println("国家： " + country);
+			System.out.println("地区： " + area);
+			System.out.println("省份: " + region);
+			System.out.println("城市： " + city);
+			System.out.println("区/县： " + county);
+			System.out.println("互联网服务提供商： " + isp);
 
-		String address = country + "/";
-		address += region + "/";
-		address += city + "/";
-		address += county;
-		System.out.println(address);
-
-
+			address = country + "/";
+			address += region + "/";
+			address += city + "/";
+			address += county;
+			System.out.println(address);
+		}else {
+			address="重复";
+			isp="重复";
+		}
 		monitor.setIp(ipAddress);
 		monitor.setPostId(id);
 		monitor.setAddress(address);
