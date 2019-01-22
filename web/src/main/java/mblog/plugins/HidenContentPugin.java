@@ -51,9 +51,9 @@ public class HidenContentPugin implements ChannelControllerHook.ChannelControlle
     }
 
     private String replace(String content) {
-        String c = content.replaceAll("<hide>([\\s\\S]*)</hide>", "隐藏内容，请回复后查看");
-        c = c.replaceAll("&lt;hide&gt;([\\s\\S]*)&lt;/hide&gt;", "隐藏内容，请回复后查看");
-        return c;
+//        String c = content.replaceAll("<hide>([\\s\\S]*)</hide>", "隐藏内容，请回复后查看");
+//        c = c.replaceAll("&lt;hide&gt;([\\s\\S]*)&lt;/hide&gt;", "隐藏内容，请回复后查看");
+        return content;
     }
 
     private boolean check(long id, long userId) {
