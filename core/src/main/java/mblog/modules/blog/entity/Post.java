@@ -57,6 +57,9 @@ public class Post implements Serializable {
 	@Column(name = "blog_class_key", length = 64)
 	private String blogClassKey;
 
+    /**
+     * 文章来源
+     */
 	@Column(name = "blog_type")
 	private String blogType;
 
