@@ -31,7 +31,7 @@ public class ViewCopyrightPugin implements ChannelControllerHook.ChannelControll
                 }
             }else {
                 //抓取文章存在问题时，内容不存在
-                content = "<br/>注意：本文丢掉了！抱歉 -_- !";
+                content = "<br/>注意：本文丢掉了！正在找回。。。";
                 ret.setContent(content);
             }
         }
