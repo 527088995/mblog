@@ -111,7 +111,7 @@ public class ChannelController extends BaseController {
 		String address = country + "/";
 		address += region + "/";
 		address += city + "/";
-		//address += county;
+		address += county;
 		System.out.println(address);
 
 
