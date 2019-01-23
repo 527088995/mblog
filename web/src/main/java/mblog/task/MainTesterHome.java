@@ -42,8 +42,8 @@ public class MainTesterHome {
         //将爬取出来的文章封装到Artcle中，并放到ArrayList里面去
         List<Article> resultList = new ArrayList<Article>(100);
 
-        //Element articleListDiv = body.getElementById("feedlist_id");
-        Elements articleList = body.getElementsByClass("topic media");
+        Element articleListDiv = body.getElementById("main");
+        Elements articleList = articleListDiv.getElementsByAttributeStarting("topic media");
         for(Element article : articleList){
             Article articleEntity = new Article();
             //标题
