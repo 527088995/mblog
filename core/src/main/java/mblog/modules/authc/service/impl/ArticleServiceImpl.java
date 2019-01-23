@@ -349,7 +349,7 @@ public class ArticleServiceImpl implements ArticleService {
                     .userAgent("Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10")	//http请求的浏览器设置
                     .timeout(1000)   //http连接时长
                     .method(Connection.Method.GET);  //请求类型是get请求，http请求还是post,delete等方式
-            //获取页面的html文档
+            //获取页面的html文档1
             Document doc = conn.get();
             Element body = doc.body();
 
