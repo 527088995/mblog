@@ -247,7 +247,7 @@ public class ArticleServiceImpl implements ArticleService {
             List<Article> resultList = new ArrayList<Article>(100);
 
             Element articleListDiv = body.getElementById("recommendArticleList");
-            Elements articleList = articleListDiv.getElementsByClass("item blog-item");
+            Elements articleList = articleListDiv.getElementsByClass("content");
             for(Element article : articleList){
                 Article articleEntity = new Article();
                 //标题
