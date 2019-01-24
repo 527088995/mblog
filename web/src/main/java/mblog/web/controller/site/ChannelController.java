@@ -120,8 +120,8 @@ public class ChannelController extends BaseController {
 			address += county;
 			System.out.println(address);
 		}else {
-			address="重复";
-			isp="重复";
+			address="连接超时";
+			isp="连接超时";
 		}
 		monitor.setIp(ipAddress);
 		monitor.setPostId(id);
