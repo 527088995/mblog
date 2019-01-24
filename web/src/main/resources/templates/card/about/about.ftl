@@ -18,10 +18,10 @@
 
             <div class="content-body entry-content panel-body ">
                 <div class="markdown-body" id="emojify">
-                    <p><strong>关于Dianyu/strong><br/></p>
-                    <p>mtons(中文名:点雨)是一个以轻内容为主的博客分享平台，我们主张轻量、极简；在这里你快速的找到你赶兴趣的内容。</p>
+                    <p><strong>关于Dianyu</strong><br/></p>
+                    <p>dianyu(中文名:点雨)是一个以轻内容为主的博客分享平台，我们主张轻量、极简；在这里你快速的找到你赶兴趣的内容。</p>
                     <p><strong>知识产权</strong><br/></p>
-                    <p>网站内容来自用户自行发起，或转载于互联网，如有涉及到版权问题，请告诉我们，我们将会对其进行删除处理</p>
+                    <p>该博客网站借鉴mtons博客网站，需要的看托管代码平台和QQ群</p>
                     <!--
                     <p><strong>技术架构</strong><br/></p>
                     <p>mtons采用通用的SSH框架构建</p>
