@@ -19,10 +19,10 @@
             <div class="content-body entry-content panel-body ">
                 <div class="markdown-body" id="emojify">
                     <p><strong>联系我们</strong></p>
-                    <p>友情链接交换、意见反馈、商业合作, 您可以发我邮件:527088995@qq.com</p>
+                    <p>友情链接交换、意见反馈、商业合作, 您可以给我写信:527088995@qq.com</p>
                     <p><strong>加入我们</strong><br/></p>
                     <p>如果你和我们有一样的梦想、有激情，别犹豫，加入我们的开源事业。</p>
-                    <p>QQ群：378433412 <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=a26a98f0ba0d5886fe79adac4977b0b42b7ade6f9a10404074d12251ebcca3a8"><img border="0" src="http://pub.idqqimg.com/wpa/images/channel.png" alt="Dainyu" title="Dainyu"></a></p>
+                    <p>QQ群：378433412 <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=a26a98f0ba0d5886fe79adac4977b0b42b7ade6f9a10404074d12251ebcca3a8"></a></p>
 				</div>
             </div>
             <div class="panel-footer operate">
