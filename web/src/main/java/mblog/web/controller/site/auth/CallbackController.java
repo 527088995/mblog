@@ -14,6 +14,7 @@ import mblog.base.utils.FilePathUtils;
 import mblog.base.utils.ImageUtils;
 import mblog.modules.user.data.OpenOauthVO;
 import mblog.modules.user.data.UserVO;
+import mblog.modules.user.service.NotifyService;
 import mblog.modules.user.service.OpenOauthService;
 import mblog.modules.user.service.UserService;
 import mblog.web.controller.BaseController;
@@ -53,15 +54,18 @@ public class CallbackController extends BaseController {
 
     @Autowired
     private AppContext appContext;
+    @Autowired
+    private NotifyService notifyService;
 
     /**
      * 跳转到微博进行授权
+     *
      * @param request
      * @param response
      * @author A蛋壳  2015年9月12日 下午3:05:54
      */
     @RequestMapping("/call_weibo")
-    public void callWeibo(HttpServletRequest request, HttpServletResponse response){
+    public void callWeibo(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=utf-8");
         try {
             APIConfig.getInstance().setOpenid_sina(appContext.getConfig().get(SiteConfig.WEIBO_CLIENT_ID));
@@ -115,22 +119,31 @@ public class CallbackController extends BaseController {
 
         // 判断是否存在绑定此accessToken的用户
         OpenOauthVO thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
+        //用户首次绑定时直接登录
         if (thirdToken == null) {
-            model.put("open", openOauth);
-            return view(Views.OAUTH_REGISTER);
+            try {
+                //保存用户信息
+                bindOauth(openOauth);
+                return login(openOauth.getUsername(), openOauth.getAccessToken(), request);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new MtonsException("登录异常");
+            }
+        } else {
+            String username = userService.get(thirdToken.getUserId()).getUsername();
+            return login(username, thirdToken.getAccessToken(), request);
         }
-        String username = userService.get(thirdToken.getUserId()).getUsername();
-        return login(username, thirdToken.getAccessToken(), request);
     }
 
     /**
      * 跳转到QQ互联授权界面
+     *
      * @param request
      * @param response
      * @author A蛋壳  2015年9月12日 下午3:28:21
      */
     @RequestMapping("/call_qq")
-    public void callQQ(HttpServletRequest request, HttpServletResponse response){
+    public void callQQ(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=utf-8");
         try {
             APIConfig.getInstance().setOpenid_qq(appContext.getConfig().get(SiteConfig.QQ_APP_ID));
@@ -182,23 +195,30 @@ public class CallbackController extends BaseController {
 
         // 判断是否存在绑定此accessToken的用户
         OpenOauthVO thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
-
         if (thirdToken == null) {
-            model.put("open", openOauth);
-            return view(Views.OAUTH_REGISTER);
+            try {
+                //保存用户信息
+                bindOauth(openOauth);
+                return login(openOauth.getUsername(), openOauth.getAccessToken(), request);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new MtonsException("登录异常");
+            }
+        } else {
+            String username = userService.get(thirdToken.getUserId()).getUsername();
+            return login(username, thirdToken.getAccessToken(), request);
         }
-        String username = userService.get(thirdToken.getUserId()).getUsername();
-        return login(username, thirdToken.getAccessToken(), request);
     }
 
     /**
      * 跳转到豆瓣授权界面
+     *
      * @param request
      * @param response
      * @author A蛋壳  2015年9月12日 下午3:09:39
      */
     @RequestMapping("/call_douban")
-    public void callDouban(HttpServletRequest request, HttpServletResponse response){
+    public void callDouban(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=utf-8");
         try {
             APIConfig.getInstance().setOpenid_douban(appContext.getConfig().get(SiteConfig.DOUBAN_API_KEY));
@@ -215,6 +235,7 @@ public class CallbackController extends BaseController {
 
     /**
      * 豆瓣回调
+     *
      * @param code
      * @param state
      * @param request
@@ -222,7 +243,7 @@ public class CallbackController extends BaseController {
      * @author A蛋壳  2015年9月12日 下午5:32:51
      */
     @RequestMapping("/douban")
-    public String callBack4Douban(String code, String state, HttpServletRequest request, ModelMap model){
+    public String callBack4Douban(String code, String state, HttpServletRequest request, ModelMap model) {
         // --
         String session_state = (String) request.getSession().getAttribute(SESSION_STATE);
         // 取消了授权
@@ -262,39 +283,26 @@ public class CallbackController extends BaseController {
 
     /**
      * 执行第三方绑定
+     *
      * @param openOauth
-     * @param request
+     * @param
      * @return
      * @throws Exception
      */
-    @RequestMapping("/bind_oauth")
-    public String bindOauth(OpenOauthVO openOauth, HttpServletRequest request) throws Exception {
-        OpenOauthVO thirdToken = openOauthService.getOauthByOauthUserId(openOauth.getOauthUserId());
-        String username = openOauth.getUsername();
+    public void bindOauth(OpenOauthVO openOauth) throws Exception {
 
-        // 已存在：提取用户信息，登录
-        if (thirdToken != null) {
-            username = userService.get(thirdToken.getUserId()).getUsername();
-            // 不存在：注册新用户，并绑定此token，登录
-        } else {
-            UserVO user = userService.getByUsername(username);
-            if(user == null){
-                UserVO u = userService.register(wrapUser(openOauth));
+        UserVO u = userService.register(wrapUser(openOauth));
+        // ===将远程图片下载到本地===
+        String ava100 = appContext.getAvaDir() + getAvaPath(u.getId(), 100);
+        ImageUtils.download(openOauth.getAvatar(), fileRepo.getRoot() + ava100);
+        userService.updateAvatar(u.getId(), ava100);
 
-                // ===将远程图片下载到本地===
-                String ava100 = appContext.getAvaDir() + getAvaPath(u.getId(), 100);
-                ImageUtils.download(openOauth.getAvatar(), fileRepo.getRoot() + ava100);
-                userService.updateAvatar(u.getId(), ava100);
-
-                thirdToken = new OpenOauthVO();
-                BeanUtils.copyProperties(openOauth, thirdToken);
-                thirdToken.setUserId(u.getId());
-                openOauthService.saveOauthToken(thirdToken);
-            } else {
-                username = user.getUsername();
-            }
-        }
-        return login(username, openOauth.getAccessToken(), request);
+        OpenOauthVO thirdToken = new OpenOauthVO();
+        BeanUtils.copyProperties(openOauth, thirdToken);
+        thirdToken.setUserId(u.getId());
+        thirdToken.setRefreshToken("");
+        thirdToken.setOauthCode(null);
+        openOauthService.saveOauthToken(thirdToken);
     }
 
     /**
@@ -306,10 +314,8 @@ public class CallbackController extends BaseController {
      */
     private String login(String username, String accessToken, HttpServletRequest request) {
         String ret = view(Views.LOGIN);
-
         if (StringUtils.isNotBlank(username)) {
             AuthenticationToken token = createToken(username, accessToken);
-
             try {
                 SecurityUtils.getSubject().login(token);
 
@@ -343,12 +349,12 @@ public class CallbackController extends BaseController {
         } else {
             user.setAvatar(Consts.AVATAR);
         }
-        return  user;
+        return user;
     }
 
     public String getAvaPath(long uid, int size) {
-		String base = FilePathUtils.getAvatar(uid);
-		return String.format("/%s_%d.jpg", base, size);
-	}
+        String base = FilePathUtils.getAvatar(uid);
+        return String.format("/%s_%d.jpg", base, size);
+    }
 
 }
