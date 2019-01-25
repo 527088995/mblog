@@ -1,6 +1,6 @@
 <#include "/default/utils/ui.ftl"/>
 <@layout channel.name>
-    <@contents channelId=channel.id pn=pn order=order blogClass=blogClass>
+    <@contents channelId=channel.id  pn=pn order=order blogClass=blogClass>
         <div class="row users-show streams">
             <div class="col-xs-12 col-md-2 side-left">
                 <nav class="navbar navbar-default shadow-box background-white">
