@@ -19,7 +19,7 @@
                 <ul class="list-group user-nav">
                     <#list blogClasss as view>
                         <li class="list-group-item">
-                            <a href="?blogClass=${view.key}"><i class="icon icon-layers"></i>  ${view.name}
+                            <a href="${base}/blogClass/${view.key}"><i class="icon icon-layers"></i>  ${view.name}
                             </a>
                         </li>
                     </#list>
