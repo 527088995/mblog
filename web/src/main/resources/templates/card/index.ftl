@@ -23,26 +23,11 @@
                             </a>
                         </li>
                     </#list>
-
                 </ul>
             </div>
         </nav>
     </div>
     <div class="col-xs-12 col-md-10 side-right">
-        <#--<div class="panel-heading">-->
-            <#--<ul class="list-inline topic-filter">-->
-                <#--<li data-toggle="tooltip" title="" data-original-title="发布时间排序">-->
-                    <#--<a href="?order=newest" class="active">最近</a>-->
-                <#--</li>-->
-                <#--<li data-toggle="tooltip" title="" data-original-title="点赞数排序">-->
-                    <#--<a href="?order=favors">投票</a>-->
-                <#--</li>-->
-                <#--<li data-toggle="tooltip" title="" data-original-title="评论次数排序">-->
-                    <#--<a href="?order=comments">热门</a>-->
-                <#--</li>-->
-            <#--</ul>-->
-            <#--<div class="clearfix"></div>-->
-        <#--</div>-->
         <div class="panel panel-default">
             <#list results.content as row>
                 <li class="list-group-item">
