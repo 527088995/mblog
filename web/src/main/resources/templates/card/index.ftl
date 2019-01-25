@@ -1,20 +1,20 @@
 <#include "/default/utils/ui.ftl"/> <#assign topId = 1 /> <@layout>
-<@contents pn=pn order=order  blogClass=blogClass>
+<@contents pn=pn  blogClass=blogClass>
 <div class="row users-show streams">
     <div class="col-xs-12 col-md-2 side-left">
         <nav class="navbar navbar-default shadow-box background-white">
             <div id="home-navbar" class="collapse navbar-collapse">
-                <ul class="list-group user-nav first">
-                    <li class="list-group-item">
-                        <a href="?order=newest"><i class="icon icon-list"></i> 最近</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="?order=favors"><i class="icon icon-speech"></i> 投票 </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="?order=comments"><i class="icon icon-heart"></i> 热门</a>
-                    </li>
-                </ul>
+                <#--<ul class="list-group user-nav first">-->
+                    <#--<li class="list-group-item">-->
+                        <#--<a href="?order=newest"><i class="icon icon-list"></i> 最近</a>-->
+                    <#--</li>-->
+                    <#--<li class="list-group-item">-->
+                        <#--<a href="?order=favors"><i class="icon icon-speech"></i> 投票 </a>-->
+                    <#--</li>-->
+                    <#--<li class="list-group-item">-->
+                        <#--<a href="?order=comments"><i class="icon icon-heart"></i> 热门</a>-->
+                    <#--</li>-->
+                <#--</ul>-->
 
                 <ul class="list-group user-nav">
                     <#list blogClasss as view>
@@ -27,6 +27,7 @@
             </div>
         </nav>
     </div>
+
     <div class="col-xs-12 col-md-10 side-right">
         <div class="panel panel-default">
             <#list results.content as row>
