@@ -16,9 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 文章内容查询
@@ -46,9 +44,22 @@ public class ContentsDirective extends TemplateDirective {
     public void execute(DirectiveHandler handler) throws Exception {
         Integer pn = handler.getInteger("pn", 1);
         Integer channelId = handler.getInteger("channelId", 0);
-        String order = handler.getString("order", Consts.order.NEWEST);
         String blogClass=handler.getString("blogClass");//博客分类
         Integer size = handler.getInteger("size", 16);
+        String order = Consts.order.HOTTEST;
+
+        Calendar calendar = Calendar.getInstance();
+        Date date=new Date();
+        calendar.setTime(date);
+        int odrType=calendar.get(Calendar.SECOND);
+        if(odrType%5==0 ||odrType%5==3){
+            order = Consts.order.NEWEST;
+        }else if(odrType%5==1){
+            order = Consts.order.FAVOR;
+        }else if(odrType%5==2){
+            order = Consts.order.FEATURED;
+        };
+
 
         Set<Integer> excludeChannelIds = new HashSet<>();
 

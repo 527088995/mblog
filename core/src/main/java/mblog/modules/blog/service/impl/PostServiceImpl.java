@@ -71,16 +71,17 @@ public class PostServiceImpl implements PostService {
 		Page<Post> page = postDao.findAll((root, query, builder) -> {
 
 			List<Order> orders = new ArrayList<>();
-
+			//查看首页排序
 			if (Consts.order.FAVOR.equals(ord)) {
 				orders.add(builder.desc(root.<Long>get("favors")));
 			} else if (Consts.order.HOTTEST.equals(ord)) {
 				orders.add(builder.desc(root.<Long>get("comments")));
-			} else {
+			} else if (Consts.order.FEATURED.equals(ord)) {
 				orders.add(builder.desc(root.<Long>get("weight")));
+			}else {
+				orders.add(builder.desc(root.<Long>get("created")));
 			}
-			orders.add(builder.desc(root.<Long>get("created")));
-			//orders.add(builder.desc(root.<String>get("blogClass")));
+
 
 			Predicate predicate = builder.conjunction();
 			//博客类型
@@ -101,10 +102,9 @@ public class PostServiceImpl implements PostService {
 
 			if (Consts.order.HOTTEST.equals(ord)) {
 				orders.add(builder.desc(root.<Long>get("views")));
+			}else if(Consts.order.NEWEST.equals(ord)) {
+				orders.add(builder.desc(root.<Long>get("views")));
 			}
-
-//			predicate.getExpressions().add(
-//					builder.equal(root.get("featured").as(Integer.class), Consts.FEATURED_DEFAULT));
 
 			query.orderBy(orders);
 
