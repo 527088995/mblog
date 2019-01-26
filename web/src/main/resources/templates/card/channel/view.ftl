@@ -82,39 +82,39 @@
         <!-- /view show -->
     </div>
     <div class="col-xs-12 col-md-3 side-right hidden-xs hidden-sm">
-        <#--<ul class="list-group about-user">-->
-            <#--<li class="list-group-item user-card" >-->
-                <#--<div class="user-avatar">-->
-                    <#--<a href="${base}/users/${view.author.id}">-->
-                        <#--<@showAva view.author.avatar "img-circle"/>-->
-                    <#--</a>-->
-                <#--</div>-->
-                <#--<div class="user-name">-->
-                    <#--<span>${view.author.name}</span>-->
-                <#--</div>-->
-            <#--</li>-->
+        <ul class="list-group about-user">
+            <li class="list-group-item user-card" >
+                <div class="user-avatar">
+                    <a href="${base}/users/${view.author.id}">
+                        <@showAva view.author.avatar "img-circle"/>
+                    </a>
+                </div>
+                <div class="user-name">
+                    <span>${view.author.name}</span>
+                </div>
+            </li>
 
-            <#--<li class="list-group-item">-->
-                <#--<a class="btn btn-primary btn-block btn-sm" href="javascript:void(0);" data-id="${view.author.id}" rel="follow"><i class="icon icon-user-follow"></i> 关注</a>-->
-            <#--</li>-->
+            <li class="list-group-item">
+                <a class="btn btn-primary btn-block btn-sm" href="javascript:void(0);" data-id="${view.author.id}" rel="follow"><i class="icon icon-user-follow"></i> 关注</a>
+            </li>
 
-            <#--<li class="list-group-item">-->
-                <#--<div class="user-datas">-->
-                    <#--<ul>-->
-                        <#--<li><strong>${view.author.posts}</strong><span>发布</span></li>-->
-                        <#--<li class="noborder"><strong>${view.author.comments}</strong><span>评论</span></li>-->
-                    <#--</ul>-->
-                <#--</div>-->
-            <#--</li>-->
-            <#--<li class="list-group-item">-->
-                <#--<div class="text-center">-->
-                    <#--<a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">-->
-                        <#--<i class="icon icon-like"></i> 喜欢-->
-                    <#--</a>-->
-                    <#--<strong id="favors">${view.favors}</strong> 喜欢-->
-                <#--</div>-->
-            <#--</li>-->
-        <#--</ul>-->
+            <li class="list-group-item">
+                <div class="user-datas">
+                    <ul>
+                        <li><strong>${view.author.posts}</strong><span>发布</span></li>
+                        <li class="noborder"><strong>${view.author.comments}</strong><span>评论</span></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="text-center">
+                    <a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">
+                        <i class="icon icon-like"></i> 喜欢
+                    </a>
+                    <strong id="favors">${view.favors}</strong> 喜欢
+                </div>
+            </li>
+        </ul>
         <#include "/default/inc/right.ftl"/>
     </div>
 </div>
@@ -149,6 +149,7 @@
 
         $('#chat_reply').show();
     }
+
     var container = $("#chat_container");
     var template = $('#chat_template')[0].text;
 
