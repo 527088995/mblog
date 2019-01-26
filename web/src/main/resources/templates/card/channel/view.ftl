@@ -43,7 +43,20 @@
                 <div class="clearfix"></div>
             </div>
         </div>
-
+        <div class="votes-container panel panel-default padding-md">
+            <div class="panel-body vote-box text-center">
+                <div class="btn-group">
+                    <a href="javascript:void(0);" rel="favor" data-id="${view.id}" data-status="false" class="vote btn btn-primary btn-inverted">
+                        <i class="icon icon-like" aria-hidden="true"></i>
+                        点赞
+                    </a>
+                    <strong id="favors" class="vote btn btn-primary btn-inverted">${view.favors}点赞</strong>
+                </div>
+                <#--<div class="voted-users">-->
+                    <#--<div class="user-lists" view="favor_users" data-id="${view.id}"></div>-->
+                <#--</div>-->
+            </div>
+        </div>
         <!-- Comments -->
         <div id="chat" class="chats shadow-box">
             <div class="chat_other">
@@ -106,14 +119,14 @@
                     </ul>
                 </div>
             </li>
-            <li class="list-group-item">
-                <div class="text-center">
-                    <a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">
-                        <i class="icon icon-like"></i> 喜欢
-                    </a>
-                    <strong id="favors">${view.favors}</strong> 喜欢
-                </div>
-            </li>
+            <#--<li class="list-group-item">-->
+                <#--<div class="text-center">-->
+                    <#--<a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">-->
+                        <#--<i class="icon icon-like"></i> 喜欢-->
+                    <#--</a>-->
+                    <#--<strong id="favors">${view.favors}</strong> 喜欢-->
+                <#--</div>-->
+            <#--</li>-->
         </ul>
         <#include "/default/inc/right.ftl"/>
     </div>
