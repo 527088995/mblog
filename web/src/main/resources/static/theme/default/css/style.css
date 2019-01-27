@@ -941,7 +941,7 @@ abbr[data-original-title], abbr[title] {
 .user-card{ padding:0;}
 .user-card .user-avatar { padding-top: 15px; padding-bottom: 10px; text-align: center;}
 .user-card .user-avatar img {width: 80px;}
-.user-card .user-name { text-align: center; font-size: 16px; font-weight: 400; margin-bottom: 5px;}
+.user-card .user-name { text-align: center; font-size: 16px; font-weight: 400; margin-bottom: 20px;}
 
 .about-user .list-group-item {padding: 10px 15px;}
 .about-user .user-datas {padding: 5px 0;}

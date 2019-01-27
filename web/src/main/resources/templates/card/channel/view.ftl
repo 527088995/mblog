@@ -94,12 +94,12 @@
         </div>
         <!-- /view show -->
     </div>
-    <div class="col-xs-12 col-md-3 side-right hidden-xs hidden-sm">
+    <div class="col-xs-12 col-md-3 side-right">
         <ul class="list-group about-user">
             <li class="list-group-item user-card" >
                 <div class="avatar pull-left">
                     <a href="${base}/users/${view.author.id}">
-                        <img class="media-object img-thumbnail avatar avatar-middle" src="${base}${view.author.avatar}" alt="">
+                        <img class="media-object img-thumbnail avatar avatar-middle" style="width: 44px;height: 44px;padding: 0;border-color: #eee;" src="${base}${view.author.avatar}" alt="">
                     </a>
                 </div>
                 <div class="user-name">
@@ -116,7 +116,7 @@
                     <ul>
                         <li><strong>${view.author.posts}</strong><span>发布</span></li>
                         <li><strong>${view.author.fans}</strong><span>粉丝</span></li>
-                        <li class="noborder"><strong>${view.author.comments}</strong><span>评论</span></li>
+                        <#--<li class="noborder"><strong>${view.author.comments}</strong><span>评论</span></li>-->
                     </ul>
                 </div>
             </li>
