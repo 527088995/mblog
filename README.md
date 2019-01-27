@@ -23,7 +23,6 @@
  账号：默认管理员账号为 admin/12345
 ```
 
-- 更多文档及教程见 [http://mtons.com/dock/mblog](http://mtons.com/dock/mblog)
 - QQ交流群：378433412
 
 ### 最新版本(2.7)更新内容：
@@ -64,5 +63,5 @@
     6. 全新的后台界面
 
 
-[官网地址](http://dianyu.site)
+[官网地址](http://dianyu.site)点击显示dianyu.site
     
