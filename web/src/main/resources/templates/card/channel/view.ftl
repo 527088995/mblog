@@ -97,9 +97,9 @@
     <div class="col-xs-12 col-md-3 side-right hidden-xs hidden-sm">
         <ul class="list-group about-user">
             <li class="list-group-item user-card" >
-                <div class="user-avatar">
+                <div class="avatar pull-left">
                     <a href="${base}/users/${view.author.id}">
-                        <@showAva view.author.avatar "img-circle"/>
+                        <img class="media-object img-thumbnail avatar avatar-middle" src="${base}${view.author.avatar}" alt="">
                     </a>
                 </div>
                 <div class="user-name">
@@ -115,18 +115,11 @@
                 <div class="user-datas">
                     <ul>
                         <li><strong>${view.author.posts}</strong><span>发布</span></li>
+                        <li><strong>${view.author.fans}</strong><span>粉丝</span></li>
                         <li class="noborder"><strong>${view.author.comments}</strong><span>评论</span></li>
                     </ul>
                 </div>
             </li>
-            <#--<li class="list-group-item">-->
-                <#--<div class="text-center">-->
-                    <#--<a class="btn btn-default btn-sm" href="javascript:void(0);" data-id="${view.id}" rel="favor">-->
-                        <#--<i class="icon icon-like"></i> 喜欢-->
-                    <#--</a>-->
-                    <#--<strong id="favors">${view.favors}</strong> 喜欢-->
-                <#--</div>-->
-            <#--</li>-->
         </ul>
         <#include "/default/inc/right.ftl"/>
     </div>
