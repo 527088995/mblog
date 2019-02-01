@@ -1,5 +1,5 @@
 @echo -----------------------------------------------------------------------------
 @echo ½«´ò°ü
 @echo -----------------------------------------------------------------------------
-mvn clean compile package
+mvn clean package -Dmaven.test.skip=true -Pproduction
 @pause
