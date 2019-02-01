@@ -83,14 +83,34 @@ public class ChannelController extends BaseController {
 
 	public  void monitorReadIp(HttpServletRequest request,Long id){
 		Monitor monitor=new Monitor();
-		String ipAddress = request.getRemoteAddr();//记录每篇文章访问的ip
+		String ip = request.getHeader("X-real-ip");//先从nginx自定义配置获取
+		//System.out.println("+++++++++++1111111111111"+ip);
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("x-forwarded-for");
+			//System.out.println("+++++++++++2222222222"+ip);
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+			//System.out.println("+++++++++++3333333333333"+ip);
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+			//System.out.println("+++++++++++44444444444"+ip);
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+			//System.out.println("+++++++++++8855555555555"+ip);
+		}
+
+
+		//String ip = request.getRemoteAddr();//记录每篇文章访问的ip
 		// json_result用于接收返回的json数据1
 		String json_result = null;
 		try {
-			if("127.0.0.1".equals(ipAddress)){
-				ipAddress="60.209.29.59";
+			if("127.0.0.1".equals(ip)){
+				ip="60.209.29.59";
 			}
-			json_result = AddressUtils.getAddresses("ip=" + ipAddress, "utf-8");
+			json_result = AddressUtils.getAddresses("ip=" + ip, "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -121,7 +141,7 @@ public class ChannelController extends BaseController {
 			address="连接超时";
 			isp="连接超时";
 		}
-		monitor.setIp(ipAddress);
+		monitor.setIp(ip);
 		monitor.setPostId(id);
 		monitor.setAddress(address);
 		monitor.setIsp(isp);
