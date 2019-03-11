@@ -23,30 +23,30 @@ public class OrderInfoSummaryListener {
 //    @Resource
 //    OrderInfoSummaryBusiness orderInfoBusiness;
 
-//    @RabbitListener(bindings = @QueueBinding(value = @Queue(value = RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY, durable = "true"),
-//            exchange = @Exchange(value = RabbitMQConstants.ORDER_SUMMARY_EXCHANGE),
-//            key = RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY))
-//    public void receiveMessage(String s, Message message) {
-//        try {
-//            log.info(">>>>>>>>>>>>>>收到订单汇总表MQ" + s);
-//            log.info("============" + new String(message.getBody()) + "==============");
-//
-//            String str = new String(message.getBody());
-//            OrderInfoDTO oo = JacksonUtil.fromJson(str, OrderInfoDTO.class);
-//            if (oo == null || oo.getId() == null) {
-//                log.info(">>>>>>>>>>>>>>订单汇总MQ消费异常：订单参数异常");
-//                return;
-//            }
-//
-//            //boolean rb = orderInfoBusiness.saveOrderInfoSummaryByOrderId(oo);
-//            boolean rb = true;
-//            if (!rb) {
-//                log.info(">>>>>>>>>>>>>>订单汇总MQ消费异常：订单参数异常");
-//            }
-//        } catch (Exception e) {
-//            log.error("RabbitMQ Error 订单汇总MQ消费" + e.getMessage(), e);
-//        }
-//    }
+    @RabbitListener(bindings = @QueueBinding(value = @Queue(value = RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY, durable = "true"),
+            exchange = @Exchange(value = RabbitMQConstants.ORDER_SUMMARY_EXCHANGE),
+            key = RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY))
+    public void receiveMessage(String s, Message message) {
+        try {
+            log.info(">>>>>>>>>>>>>>收到订单汇总表MQ" + s);
+            log.info("============" + new String(message.getBody()) + "==============");
+
+            String str = new String(message.getBody());
+            OrderInfoDTO oo = JacksonUtil.fromJson(str, OrderInfoDTO.class);
+            if (oo == null || oo.getId() == null) {
+                log.info(">>>>>>>>>>>>>>订单汇总MQ消费异常：订单参数异常");
+                return;
+            }
+
+            //boolean rb = orderInfoBusiness.saveOrderInfoSummaryByOrderId(oo);
+            boolean rb = true;
+            if (!rb) {
+                log.info(">>>>>>>>>>>>>>订单汇总MQ消费异常：订单参数异常");
+            }
+        } catch (Exception e) {
+            log.error("RabbitMQ Error 订单汇总MQ消费" + e.getMessage(), e);
+        }
+    }
 
 
 }

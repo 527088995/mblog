@@ -9,6 +9,7 @@
 */
 package mblog.web.controller.site;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import mblog.base.lang.Consts;
 import mblog.constant.rediskeys.RewardDetailRedisKeysConstants;
@@ -29,6 +30,9 @@ import mblog.redis.customer.JedisUtil;
 import mblog.util.JacksonUtil;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.util.AddressUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +53,8 @@ import java.io.UnsupportedEncodingException;
  */
 @Controller
 public class ChannelController extends BaseController {
+    private final Logger logger = LoggerFactory.getLogger(ChannelController.class);
+
     @Autowired
     private ChannelService channelService;
     @Autowired
@@ -84,11 +90,12 @@ public class ChannelController extends BaseController {
         MqOrderDTO mqOrderDTO = new MqOrderDTO();
         mqOrderDTO.setOrderId(1111111L);
         mqOrderDTO.setMemberId(22222L);
-       // immediateSender.sendMessage(mqOrderDTO, 2 * 60 * 1000 );
+        //死信队列
+        immediateSender.sendMessage(mqOrderDTO, 2 * 60 * 1000 );
 
         // 发送存入订单主表MQ
        // log.info("推送MQ消息，订单超时未付款使用");
-        rabbitTemplate.convertAndSend(RabbitMQConstants.ORDER_SUMMARY_EXCHANGE, RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY,
+        this.convertAndSend(RabbitMQConstants.ORDER_SUMMARY_EXCHANGE, RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY,
                 JacksonUtil.toJson(orderInfo));
 
 
@@ -112,6 +119,23 @@ public class ChannelController extends BaseController {
         monitorReadIp(request, id);
         model.put("view", view);
         return view(Views.ROUTE_POST_VIEW);
+    }
+    /**
+     * 发送消息
+     *
+     * @param exchange        交换机名称
+     * @param routingKey      路由key
+     * @param message         消息内容
+     * @throws AmqpException
+     */
+    private void convertAndSend(String exchange, String routingKey, final Object message) throws AmqpException {
+        try {
+            rabbitTemplate.convertAndSend(exchange, routingKey, message);
+        } catch (Exception e) {
+            logger.error("MQ消息发送异常，消息ID：{}，消息体:{}, exchangeName:{}, routingKey:{}",
+                     JSON.toJSONString(message), exchange, routingKey, e);
+            // TODO 保存消息到数据库
+        }
     }
 
     public void monitorReadIp(HttpServletRequest request, Long id) {
