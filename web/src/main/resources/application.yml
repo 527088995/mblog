@@ -35,7 +35,14 @@ spring:
             template_update_delay: 0
             datetime_format: yyyy-MM-dd HH:mm
             number_format: 0.##
-
+    rabbitmq:
+        host: 106.13.55.232
+        port: 5672
+        username: admin
+        password: admin
+    jackson:
+        time-zone: GMT+8
+        date-format: yyyy-MM-dd HH:mm:ss
     redis:
         #    cluster:
         #      nodes: 192.168.3.200:6379
