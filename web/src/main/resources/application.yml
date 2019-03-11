@@ -1,5 +1,20 @@
 server:
     port: 8080 #服务器用80端口
+    servlet:
+
+#log
+logging:
+    config: classpath:logback.xml
+    root: debug
+    level:
+        com:
+            netflix: warn
+            dsmall: debug
+        cn:
+            px: debug
+        org:
+            springframework: warn
+            apache: warn
 spring:
     devtools:
         enabled: true
@@ -43,7 +58,7 @@ spring:
 
     jpa:
         database: mysql
-        show-sql: false
+        show-sql: true
         hibernate:
             ddl-auto: update
         properties:
@@ -88,9 +103,9 @@ common:
         oss:
             #文件上传大小，单位：M
             oss-image-size: 10
-            bucket-name: dsmall
-            http-url: https://dsmall.oss-cn-qingdao.aliyuncs.com
-            endpoint: https://oss-cn-qingdao.aliyuncs.com
+            bucket-name: dianyu-mblog
+            http-url: https://dianyu-mblog.oss-cn-beijing.aliyuncs.com
+            endpoint: https://oss-cn-beijing.aliyuncs.com
             access-key-id: LTAIqqFQEmdy6juv
             access-key-secret: mmDIPdf2JOwv4WjGbis8YQQtvKtS2P
     wxpay:
