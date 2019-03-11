@@ -54,13 +54,13 @@ public class ArticleTypeServiceImpl implements ArticleTypeService {
 
 	@Override
 	public ArticleType getById(int id) {
-		return articleTypeDao.findOne(id);
+		return articleTypeDao.getOne(id);
 	}
 
 	@Override
 	@Transactional
 	public void update(ArticleType articleType) {
-		ArticleType po = articleTypeDao.findOne(articleType.getId());
+		ArticleType po = articleTypeDao.getOne(articleType.getId());
 		if (po != null) {
 			BeanUtils.copyProperties(articleType, po);
 		} else {
@@ -73,7 +73,7 @@ public class ArticleTypeServiceImpl implements ArticleTypeService {
 	@Override
 	@Transactional
 	public void delete(int id) {
-		articleTypeDao.delete(id);
+		articleTypeDao.deleteById(id);
 	}
 
 }

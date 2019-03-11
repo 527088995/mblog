@@ -39,7 +39,7 @@ public class OpenOauthServiceImpl implements OpenOauthService {
     @Transactional
     public UserVO getUserByOauthToken(String oauth_token) {
         OpenOauth thirdToken = openOauthDao.findByAccessToken(oauth_token);
-        User userPO = userDao.findOne(thirdToken.getId());
+        User userPO = userDao.getOne(thirdToken.getId());
         return BeanMapUtils.copy(userPO, 0);
     }
 
@@ -72,7 +72,7 @@ public class OpenOauthServiceImpl implements OpenOauthService {
     public boolean checkIsOriginalPassword(long userId) {
         OpenOauth po = openOauthDao.findByUserId(userId);
         if (po != null) {
-            User upo = userDao.findOne(userId);
+            User upo = userDao.getOne(userId);
 
             String pwd = MD5.md5(po.getAccessToken());
             // 判断用户密码 和 登录状态

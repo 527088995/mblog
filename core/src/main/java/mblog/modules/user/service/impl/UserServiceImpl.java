@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@CacheEvict(key = "#user.getId()")
 	public AccountProfile update(UserVO user) {
-		User po = userDao.findOne(user.getId());
+		User po = userDao.getOne(user.getId());
 		if (null != po) {
 			po.setName(user.getName());
 			po.setSignature(user.getSignature());
@@ -143,7 +143,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@CacheEvict(key = "#id")
 	public AccountProfile updateEmail(long id, String email) {
-		User po = userDao.findOne(id);
+		User po = userDao.getOne(id);
 
 		if (null != po) {
 
@@ -168,7 +168,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Cacheable(key = "#userId")
 	public UserVO get(long userId) {
-		User po = userDao.findOne(userId);
+		User po = userDao.getOne(userId);
 		UserVO ret = null;
 		if (po != null) {
 			ret = BeanMapUtils.copy(po, 0);
@@ -202,7 +202,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@CacheEvict(key = "#id")
 	public AccountProfile updateAvatar(long id, String path) {
-		User po = userDao.findOne(id);
+		User po = userDao.getOne(id);
 		if (po != null) {
 			po.setAvatar(path);
 			userDao.save(po);
@@ -213,7 +213,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void updatePassword(long id, String newPassword) {
-		User po = userDao.findOne(id);
+		User po = userDao.getOne(id);
 
 		Assert.hasLength(newPassword, "密码不能为空!");
 
@@ -226,7 +226,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void updatePassword(long id, String oldPassword, String newPassword) {
-		User po = userDao.findOne(id);
+		User po = userDao.getOne(id);
 
 		Assert.hasLength(newPassword, "密码不能为空!");
 
@@ -240,7 +240,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void updateStatus(long id, int status) {
-		User po = userDao.findOne(id);
+		User po = userDao.getOne(id);
 
 		if (po != null) {
 			po.setStatus(status);
@@ -251,7 +251,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public AccountProfile updateActiveEmail(long id, int activeEmail) {
-		User po = userDao.findOne(id);
+		User po = userDao.getOne(id);
 
 		if (po != null) {
 			po.setActiveEmail(activeEmail);

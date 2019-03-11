@@ -70,13 +70,13 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role get(long id) {
-        Role po = roleDao.findOne(id);
+        Role po = roleDao.getOne(id);
         return toVO(po);
     }
 
     @Override
     public void update(Role r, Set<Permission> permissions) {
-        Role po = roleDao.findOne(r.getId());
+        Role po = roleDao.getOne(r.getId());
 
         if (null == po) {
             po = new Role();
@@ -107,14 +107,14 @@ public class RoleServiceImpl implements RoleService {
     public boolean delete(long id) {
         List<UserRole> urs = userRoleDao.findAllByRoleId(id);
         Assert.state(urs == null || urs.size() == 0, "该角色已经被使用,不能被删除");
-        roleDao.delete(id);
+        roleDao.deleteById(id);
         rolePermissionService.deleteByRoleId(id);
         return true;
     }
 
     @Override
     public void activate(long id, boolean active) {
-        Role po = roleDao.findOne(id);
+        Role po = roleDao.getOne(id);
         if (po != null) {
             po.setStatus(active ? Role.STATUS_NORMAL : Role.STATUS_CLOSED);
         }

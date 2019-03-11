@@ -54,13 +54,13 @@ public class ChannelServiceImpl implements ChannelService {
 
 	@Override
 	public Channel getById(int id) {
-		return channelDao.findOne(id);
+		return channelDao.getOne(id);
 	}
 
 	@Override
 	@Transactional
 	public void update(Channel channel) {
-		Channel po = channelDao.findOne(channel.getId());
+		Channel po = channelDao.getOne(channel.getId());
 		if (po != null) {
 			BeanUtils.copyProperties(channel, po);
 		} else {
@@ -73,7 +73,7 @@ public class ChannelServiceImpl implements ChannelService {
 	@Override
 	@Transactional
 	public void delete(int id) {
-		channelDao.delete(id);
+		channelDao.deleteById(id);
 	}
 
 }

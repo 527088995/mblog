@@ -54,7 +54,7 @@ public class PostDaoImpl implements PostDaoCustom {
 				.matching(q).createQuery();
 
 		org.hibernate.search.jpa.FullTextQuery query = fullTextSession.createFullTextQuery(luceneQuery);
-		query.setFirstResult(pageable.getOffset());
+		query.setFirstResult(pageable.getPageNumber());
 		query.setMaxResults(pageable.getPageSize());
 
 	    StandardAnalyzer standardAnalyzer = new StandardAnalyzer();
@@ -96,7 +96,7 @@ public class PostDaoImpl implements PostDaoCustom {
 		luceneQuery = term.createQuery();
 
 		org.hibernate.search.jpa.FullTextQuery query = fullTextSession.createFullTextQuery(luceneQuery);
-	    query.setFirstResult(pageable.getOffset());
+	    query.setFirstResult(pageable.getPageNumber());
 	    query.setMaxResults(pageable.getPageSize());
 
 		Sort sort = new Sort(new SortField("id", SortField.Type.LONG, true));

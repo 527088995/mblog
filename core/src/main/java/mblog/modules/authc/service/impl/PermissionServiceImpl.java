@@ -92,7 +92,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Permission get(long id) {
-        return permissionDao.findOne(id);
+        return permissionDao.getOne(id);
     }
 
 }

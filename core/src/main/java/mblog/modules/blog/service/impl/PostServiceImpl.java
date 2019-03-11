@@ -271,7 +271,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	@Cacheable(key = "'view_' + #id")
 	public PostVO get(long id) {
-		Post po = postDao.findOne(id);
+		Post po = postDao.getOne(id);
 		PostVO d = null;
 		if (po != null) {
 			d = BeanMapUtils.copy(po, 1);
@@ -280,7 +280,7 @@ public class PostServiceImpl implements PostService {
 
 			d.setChannel(channelService.getById(d.getChannelId()));
 
-			PostAttribute attr = postAttributeDao.findOne(po.getId());
+			PostAttribute attr = postAttributeDao.getOne(po.getId());
 			if (attr != null) {
 				d.setContent(attr.getContent());
 			}
@@ -296,7 +296,7 @@ public class PostServiceImpl implements PostService {
 	@Transactional
 	@CacheEvict(allEntries = true)
 	public void update(PostVO p){
-		Post po = postDao.findOne(p.getId());
+		Post po = postDao.getOne(p.getId());
 
 		if (po != null) {
 			po.setTitle(p.getTitle());//标题
@@ -324,7 +324,7 @@ public class PostServiceImpl implements PostService {
 	@Transactional
 	@CacheEvict(allEntries = true)
 	public void updateFeatured(long id, int featured) {
-		Post po = postDao.findOne(id);
+		Post po = postDao.getOne(id);
 
 		if (po != null) {
 			int status = Consts.FEATURED_ACTIVE == featured ? Consts.FEATURED_ACTIVE: Consts.FEATURED_DEFAULT;
@@ -337,7 +337,7 @@ public class PostServiceImpl implements PostService {
 	@Transactional
 	@CacheEvict(allEntries = true)
 	public void updateWeight(long id, int weight) {
-		Post po = postDao.findOne(id);
+		Post po = postDao.getOne(id);
 
 		if (po != null) {
 			int max = weight;
@@ -353,10 +353,10 @@ public class PostServiceImpl implements PostService {
 	@Transactional
 	@CacheEvict(allEntries = true)
 	public void delete(long id) {
-		Post po = postDao.findOne(id);
+		Post po = postDao.getOne(id);
 		if (po != null) {
-			postDao.delete(id);
-			postAttributeDao.delete(id);
+			postDao.deleteById(id);
+			postAttributeDao.deleteById(id);
 
 			onPushEvent(po, PostUpdateEvent.ACTION_DELETE);
 		}
@@ -366,13 +366,13 @@ public class PostServiceImpl implements PostService {
 	@Transactional
 	@CacheEvict(allEntries = true)
 	public void delete(long id, long authorId) {
-		Post po = postDao.findOne(id);
+		Post po = postDao.getOne(id);
 		if (po != null) {
 			// 判断文章是否属于当前登录用户
 			Assert.isTrue(po.getAuthorId() == authorId, "认证失败");
 
-			postDao.delete(id);
-			postAttributeDao.delete(id);
+			postDao.deleteById(id);
+			postAttributeDao.deleteById(id);
 
 			onPushEvent(po, PostUpdateEvent.ACTION_DELETE);
 		}

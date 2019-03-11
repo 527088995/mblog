@@ -14,12 +14,16 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<sharding-sphere.version>3.0.0.M2</sharding-sphere.version>
+		<com.aliyun.aliyun-java-sdk-core.version>3.2.3</com.aliyun.aliyun-java-sdk-core.version>
+		<com.aliyun.oss.aliyun-sdk-oss.version>2.8.2</com.aliyun.oss.aliyun-sdk-oss.version>
+		<com.aliyun.aliyun-java-sdk-dysmapi.version>1.0.0</com.aliyun.aliyun-java-sdk-dysmapi.version>
 	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.8.RELEASE</version>
+		<version>2.0.1.RELEASE</version>
 		<relativePath/>
 	</parent>
 
@@ -70,8 +74,9 @@
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.9.2</version>
+			<version>1.11.3</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.jsoup</groupId>
@@ -147,6 +152,82 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.20</version>
+		</dependency>
+
+		<!--阿里插件-->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.shardingsphere</groupId>
+			<artifactId>sharding-jdbc</artifactId>
+			<version>${sharding-sphere.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.shardingsphere</groupId>
+			<artifactId>sharding-core</artifactId>
+			<version>${sharding-sphere.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>${com.aliyun.oss.aliyun-sdk-oss.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>aliyun-java-sdk-core</artifactId>
+			<version>${com.aliyun.aliyun-java-sdk-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+			<version>${com.aliyun.aliyun-java-sdk-dysmapi.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+		</dependency>
+		<dependency>
+			<groupId>com.monitorjbl</groupId>
+			<artifactId>xlsx-streamer</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.log4j/com.springsource.org.apache.log4j -->
+		<dependency>
+			<groupId>org.apache.log4j</groupId>
+			<artifactId>com.springsource.org.apache.log4j</artifactId>
+			<version>1.2.16</version>
 		</dependency>
 
 		<dependency>

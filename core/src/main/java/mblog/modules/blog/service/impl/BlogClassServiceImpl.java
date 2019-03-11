@@ -54,13 +54,13 @@ public class BlogClassServiceImpl implements BlogClassService {
 
 	@Override
 	public BlogClass getById(int id) {
-		return blogClassDao.findOne(id);
+		return blogClassDao.getOne(id);
 	}
 
 	@Override
 	@Transactional
 	public void update(BlogClass blogClass) {
-		BlogClass po = blogClassDao.findOne(blogClass.getId());
+		BlogClass po = blogClassDao.getOne(blogClass.getId());
 		if (po != null) {
 			BeanUtils.copyProperties(blogClass, po);
 		} else {
@@ -73,7 +73,7 @@ public class BlogClassServiceImpl implements BlogClassService {
 	@Override
 	@Transactional
 	public void delete(int id) {
-		blogClassDao.delete(id);
+		blogClassDao.deleteById(id);
 	}
 
 }

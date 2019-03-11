@@ -159,7 +159,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	@Transactional
 	public void delete(long id, long authorId) {
-		Comment po = commentDao.findOne(id);
+		Comment po = commentDao.getOne(id);
 		if (po != null) {
 			// 判断文章是否属于当前登录用户
 			Assert.isTrue(po.getAuthorId() == authorId, "认证失败");
