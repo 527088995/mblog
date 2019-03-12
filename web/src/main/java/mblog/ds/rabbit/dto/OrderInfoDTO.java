@@ -5,9 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 功能描述 订单信息DTO
@@ -26,6 +24,10 @@ public class OrderInfoDTO implements Serializable {
      * 主键
      */
     private Long id;
+    /**
+     * 订单ID
+     */
+    private Long orderId;
     /**
      * 用户ID
      */
