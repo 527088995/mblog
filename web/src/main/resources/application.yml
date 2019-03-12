@@ -45,7 +45,7 @@ spring:
         date-format: yyyy-MM-dd HH:mm:ss
     redis:
         #    cluster:
-        #      nodes: 192.168.3.200:6379
+        #      nodes: 106.13.55.232:6379
         #      max-redirects: 5
         host: 106.13.55.232
         port: 6379
@@ -58,10 +58,47 @@ spring:
     session:
         store-type: redis
     datasource:
-        driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://106.13.55.232:3306/db_mblog?useSSL=false&characterEncoding=utf8
-        username: root
-        password: root
+            driver-class-name: com.mysql.jdbc.Driver
+            url: jdbc:mysql://106.13.55.232:3306/db_mblog?useSSL=false&characterEncoding=utf8
+            username: root
+            password: root
+
+#        order00:
+#            driver-class-name: com.mysql.jdbc.Driver
+#            jdbc-url: jdbc:mysql://106.13.55.232:3306/ds_order_00?useUnicode=true&characterEncoding=utf8&useSSL=false
+#            username: root
+#            password: root
+#            minimum-idle: 10
+#            maximum-idle: 20
+#            max-wait-millis: 10000
+#            initial-size: 10
+#        order01:
+#            driver-class-name: com.mysql.jdbc.Driver
+#            jdbc-url: jdbc:mysql://106.13.55.232:3306/ds_order_01?useUnicode=true&characterEncoding=utf8&useSSL=false
+#            username: root
+#            password: root
+#            minimum-idle: 10
+#            maximum-idle: 20
+#            max-wait-millis: 10000
+#            initial-size: 10
+#        order02:
+#            driver-class-name: com.mysql.jdbc.Driver
+#            jdbc-url: jdbc:mysql://106.13.55.232:3306/ds_order_02?useUnicode=true&characterEncoding=utf8&useSSL=false
+#            username: root
+#            password: root
+#            minimum-idle: 10
+#            maximum-idle: 20
+#            max-wait-millis: 10000
+#            initial-size: 10
+#        order03:
+#            driver-class-name: com.mysql.jdbc.Driver
+#            jdbc-url: jdbc:mysql://106.13.55.232:3306/ds_order_03?useUnicode=true&characterEncoding=utf8&useSSL=false
+#            username: root
+#            password: root
+#            minimum-idle: 10
+#            maximum-idle: 20
+#            max-wait-millis: 10000
+#            initial-size: 10
 
     jpa:
         database: mysql

@@ -5,17 +5,23 @@ import io.shardingsphere.core.api.algorithm.sharding.standard.PreciseShardingAlg
 
 import java.util.Collection;
 
-public final class DatabaseShardingAlgorithm implements PreciseShardingAlgorithm<Long> {
+/**
+ *功能描述 分库分表
+ *
+ * @return
+ * @author wj
+ * @date 2019/3/12 10:10
+ */
+public final class TablePreciseShardingAlgorithm implements PreciseShardingAlgorithm<Long> {
 
     @Override
     public String doSharding(final Collection<String> availableTargetNames, final PreciseShardingValue<Long> shardingValue) {
-        long i = shardingValue.getValue() % (10 * availableTargetNames.size()) / 10 ;
+        int size = availableTargetNames.size();
         for (String each : availableTargetNames) {
-            if (each.endsWith(i + "")) {
+            if (each.endsWith(shardingValue.getValue() % size + "")) {
                 return each;
             }
         }
         throw new UnsupportedOperationException();
     }
-
 }

@@ -1,4 +1,4 @@
-package mblog.configuration.redis;
+package mblog.redis;
 
 import mblog.redis.customer.RedisClientServer;
 import mblog.redis.customer.RedisClusterServer;
