@@ -81,7 +81,7 @@ public class ChannelController extends BaseController {
 
         String beanStr = net.sf.json.JSONObject.fromObject(model).toString();
         //存储到缓存
-        JedisUtil.setJson(RewardDetailRedisKeysConstants.REWARDLEVEL, beanStr);
+      //  JedisUtil.setJson(RewardDetailRedisKeysConstants.REWARDLEVEL, beanStr);
         // 服务中没有，默认30分钟
         OrderInfoDTO orderInfo=new OrderInfoDTO();
         orderInfo.setId(21122L);
