@@ -1,32 +1,17 @@
 server:
-    port: 8080 #服务器用80端口
-    servlet:
-
-#log
-logging:
-    config: classpath:logback.xml
-    root: debug
-    level:
-        com:
-            netflix: warn
-            dsmall: debug
-        cn:
-            px: debug
-        org:
-            springframework: warn
-            apache: warn
+    port: 80 #服务器用80端口
 spring:
     devtools:
         enabled: true
     http:
         encoding:
-          charset: UTF-8
-          force: true
-          enabled: true
+            charset: UTF-8
+            force: true
+            enabled: true
     freemarker:
         template-loader-path:
-        - classpath:/templates
-        - file:./templates
+            - classpath:/templates
+            - file:./templates
         cache: false
         checkTemplateLocation: false
         settings:
@@ -43,62 +28,12 @@ spring:
     jackson:
         time-zone: GMT+8
         date-format: yyyy-MM-dd HH:mm:ss
-    redis:
-        #    cluster:
-        #      nodes: 106.13.55.232:6379
-        #      max-redirects: 5
-        host: 106.13.55.232
-        port: 6379
-        timeout: 3000
-        pool:
-            max-active: 20
-            max-idle: 5
-            min-idle: 2
-            max-wait: 2000
-    session:
-        store-type: redis
-    datasource:
-            driver-class-name: com.mysql.jdbc.Driver
-            url: jdbc:mysql://106.13.55.232:3306/db_mblog?useSSL=false&characterEncoding=utf8
-            username: root
-            password: root
 
-#        order00:
-#            driver-class-name: com.mysql.jdbc.Driver
-#            jdbc-url: jdbc:mysql://106.13.55.232:3306/ds_order_00?useUnicode=true&characterEncoding=utf8&useSSL=false
-#            username: root
-#            password: root
-#            minimum-idle: 10
-#            maximum-idle: 20
-#            max-wait-millis: 10000
-#            initial-size: 10
-#        order01:
-#            driver-class-name: com.mysql.jdbc.Driver
-#            jdbc-url: jdbc:mysql://106.13.55.232:3306/ds_order_01?useUnicode=true&characterEncoding=utf8&useSSL=false
-#            username: root
-#            password: root
-#            minimum-idle: 10
-#            maximum-idle: 20
-#            max-wait-millis: 10000
-#            initial-size: 10
-#        order02:
-#            driver-class-name: com.mysql.jdbc.Driver
-#            jdbc-url: jdbc:mysql://106.13.55.232:3306/ds_order_02?useUnicode=true&characterEncoding=utf8&useSSL=false
-#            username: root
-#            password: root
-#            minimum-idle: 10
-#            maximum-idle: 20
-#            max-wait-millis: 10000
-#            initial-size: 10
-#        order03:
-#            driver-class-name: com.mysql.jdbc.Driver
-#            jdbc-url: jdbc:mysql://106.13.55.232:3306/ds_order_03?useUnicode=true&characterEncoding=utf8&useSSL=false
-#            username: root
-#            password: root
-#            minimum-idle: 10
-#            maximum-idle: 20
-#            max-wait-millis: 10000
-#            initial-size: 10
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://106.13.55.232:3306/db_mblog?useSSL=false&characterEncoding=utf8
+        username: root
+        password: mypwd
 
     jpa:
         database: mysql
@@ -128,32 +63,6 @@ spring:
 site:
     theme: card
     store:
-      repo: absolute
-      root: /data/mblog/
-      size: 2
-common:
-    aliyun:
-        sms:
-            access-key-id:
-            access-key-secret:
-            sign-name:
-            register-sms-template-code:
-            login-sms-template-code:
-            password-sms-template-code:
-            #     设置短信验证码，此值设置后，所有验证码都为此值
-            send-phone-code-sms: 999999
-            #    短信验证码发送开关,false-不发短信；true-发送短信
-            send-sms-flag: false
-        oss:
-            #文件上传大小，单位：M
-            oss-image-size: 10
-            bucket-name: dianyu-mblog
-            http-url: https://dianyu-mblog.oss-cn-beijing.aliyuncs.com
-            endpoint: https://oss-cn-beijing.aliyuncs.com
-            access-key-id: LTAIqqFQEmdy6juv
-            access-key-secret: mmDIPdf2JOwv4WjGbis8YQQtvKtS2P
-    wxpay:
-        appId: wxa617f1e7d1b2a223
-        mchId: 1510733941
-        key: F958555EB4D5E51226011B2012B07B4D
-        notifyUrl:
+        repo: absolute
+        root: /data/mblog/
+        size: 2

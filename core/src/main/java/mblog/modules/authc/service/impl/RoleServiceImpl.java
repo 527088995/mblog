@@ -107,7 +107,7 @@ public class RoleServiceImpl implements RoleService {
     public boolean delete(long id) {
         List<UserRole> urs = userRoleDao.findAllByRoleId(id);
         Assert.state(urs == null || urs.size() == 0, "该角色已经被使用,不能被删除");
-        roleDao.deleteById(id);
+        roleDao.delete(id);
         rolePermissionService.deleteByRoleId(id);
         return true;
     }

@@ -73,7 +73,7 @@ public class BlogClassServiceImpl implements BlogClassService {
 	@Override
 	@Transactional
 	public void delete(int id) {
-		blogClassDao.deleteById(id);
+		blogClassDao.delete(id);
 	}
 
 }

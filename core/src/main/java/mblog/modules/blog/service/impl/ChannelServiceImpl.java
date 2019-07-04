@@ -73,7 +73,7 @@ public class ChannelServiceImpl implements ChannelService {
 	@Override
 	@Transactional
 	public void delete(int id) {
-		channelDao.deleteById(id);
+		channelDao.delete(id);
 	}
 
 }

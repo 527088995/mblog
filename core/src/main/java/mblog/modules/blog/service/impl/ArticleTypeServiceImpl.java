@@ -73,7 +73,7 @@ public class ArticleTypeServiceImpl implements ArticleTypeService {
 	@Override
 	@Transactional
 	public void delete(int id) {
-		articleTypeDao.deleteById(id);
+		articleTypeDao.delete(id);
 	}
 
 }

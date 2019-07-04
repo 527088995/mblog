@@ -95,8 +95,8 @@ public class ChannelController extends BaseController {
 
         // 发送存入订单主表MQ
        // log.info("推送MQ消息，订单超时未付款使用");
-        this.convertAndSend(RabbitMQConstants.ORDER_SUMMARY_EXCHANGE, RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY,
-                JacksonUtil.toJson(orderInfo));
+//        this.convertAndSend(RabbitMQConstants.ORDER_SUMMARY_EXCHANGE, RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY,
+//                JacksonUtil.toJson(orderInfo));
 
 
         Channel channel = channelService.getById(id);

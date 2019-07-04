@@ -239,7 +239,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Transactional
-	@CacheEvict(allEntries = true)
+	//@CacheEvict(allEntries = true)
 	public long post(PostVO post) {
 		Post po = new Post();
 
@@ -355,8 +355,8 @@ public class PostServiceImpl implements PostService {
 	public void delete(long id) {
 		Post po = postDao.getOne(id);
 		if (po != null) {
-			postDao.deleteById(id);
-			postAttributeDao.deleteById(id);
+			postDao.delete(id);
+			postAttributeDao.delete(id);
 
 			onPushEvent(po, PostUpdateEvent.ACTION_DELETE);
 		}
@@ -371,8 +371,8 @@ public class PostServiceImpl implements PostService {
 			// 判断文章是否属于当前登录用户
 			Assert.isTrue(po.getAuthorId() == authorId, "认证失败");
 
-			postDao.deleteById(id);
-			postAttributeDao.deleteById(id);
+			postDao.delete(id);
+			postAttributeDao.delete(id);
 
 			onPushEvent(po, PostUpdateEvent.ACTION_DELETE);
 		}

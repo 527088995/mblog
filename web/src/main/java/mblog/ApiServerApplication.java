@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 //定时任务注解
-//@EnableScheduling
+@EnableScheduling
 public class ApiServerApplication {
 
     public static void main(String[] args) {
