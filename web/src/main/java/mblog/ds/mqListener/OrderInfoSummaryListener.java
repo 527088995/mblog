@@ -16,9 +16,11 @@ import org.springframework.stereotype.Component;
  * @Date: 2019/3/7 09:35
  * @Description: 订单汇总
  */
-@Slf4j
+//@Slf4j
 @Component
 public class OrderInfoSummaryListener {
+
+    private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("mblog");
 
 //    @Resource
 //    OrderInfoSummaryBusiness orderInfoBusiness;
@@ -42,7 +44,7 @@ public class OrderInfoSummaryListener {
 
             String str = new String(message.getBody());
             OrderInfoDTO oo = JacksonUtil.fromJson(str, OrderInfoDTO.class);
-            if (oo == null || oo.getId() == null) {
+            if (oo == null ) {
                 log.info(">>>>>>>>>>>>>>正常队列订单汇总MQ消费异常：订单参数异常");
                 return;
             }
@@ -76,7 +78,7 @@ public class OrderInfoSummaryListener {
 
             String str = new String(message.getBody());
             OrderInfoDTO oo = JacksonUtil.fromJson(str, OrderInfoDTO.class);
-            if (oo == null || oo.getId() == null) {
+            if (oo == null ) {
                 log.info(">>>>>>>>>>>>>>死信队列订单汇总MQ消费异常：订单参数异常");
                 return;
             }
