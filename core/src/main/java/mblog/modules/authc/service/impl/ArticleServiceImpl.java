@@ -125,7 +125,7 @@ public class ArticleServiceImpl implements ArticleService {
             post.setArticleTypeKey("reprint");//转载
             post.setBlogClassKey(article.getType());//博客分类
             post.setTitle(article.getTitle());
-            post.setAuthorId(11);
+            post.setAuthorId(1);
             post.setChannelId(2);
             post.setBlogType("OSC");
             post.setAuthorName(article.getType());
