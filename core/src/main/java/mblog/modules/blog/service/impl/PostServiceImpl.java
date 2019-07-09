@@ -239,7 +239,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Transactional
-	//@CacheEvict(allEntries = true)
+	@CacheEvict(allEntries = true)
 	public long post(PostVO post) {
 		Post po = new Post();
 
@@ -272,7 +272,7 @@ public class PostServiceImpl implements PostService {
 	@Cacheable(key = "'view_' + #id")
 	public PostVO get(long id) {
 		Post po = postDao.getOne(id);
-		PostVO d = null;
+		PostVO d = new PostVO();
 		if (po != null) {
 			d = BeanMapUtils.copy(po, 1);
 
