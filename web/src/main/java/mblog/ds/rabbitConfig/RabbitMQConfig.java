@@ -74,4 +74,5 @@ public class RabbitMQConfig {
     public Binding redirectBinding() {
         return new Binding(RabbitMQConstants.ORDER_REDIRECT_QUEUE_NAME, Binding.DestinationType.QUEUE, RabbitMQConstants.ORDER_DEAD_EXCHANGE_NAME, RabbitMQConstants.ORDER_DEAD_KEY, null);
     }
+
 }

@@ -9,10 +9,11 @@
 */
 package mblog.web.controller.site;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import mblog.base.lang.Consts;
-import mblog.ds.constant.rediskeys.RewardDetailRedisKeysConstants;
+import mblog.ds.rabbit.dto.MqOrderDTO;
+import mblog.ds.rabbit.dto.OrderInfoDTO;
+import mblog.ds.rabbitConfig.ImmediateSender;
 import mblog.modules.authc.entity.Monitor;
 import mblog.modules.authc.service.MonitorService;
 import mblog.modules.blog.data.PostVO;
@@ -22,17 +23,10 @@ import mblog.modules.blog.service.BlogClassService;
 import mblog.modules.blog.service.ChannelService;
 import mblog.modules.blog.service.PostService;
 import mblog.modules.user.data.AccountProfile;
-import mblog.ds.rabbit.RabbitMQConstants;
-import mblog.ds.rabbit.dto.MqOrderDTO;
-import mblog.ds.rabbit.dto.OrderInfoDTO;
-import mblog.ds.rabbitConfig.ImmediateSender;
-import mblog.ds.redis.customer.JedisUtil;
-import mblog.util.JacksonUtil;
 import mblog.web.controller.BaseController;
 import mblog.web.controller.site.util.AddressUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,9 +75,9 @@ public class ChannelController extends BaseController {
 
         String beanStr = net.sf.json.JSONObject.fromObject(model).toString();
         //存储到缓存
-      //  JedisUtil.setJson(RewardDetailRedisKeysConstants.REWARDLEVEL, beanStr);
+        //  JedisUtil.setJson(RewardDetailRedisKeysConstants.REWARDLEVEL, beanStr);
         // 服务中没有，默认30分钟
-        OrderInfoDTO orderInfo=new OrderInfoDTO();
+        OrderInfoDTO orderInfo = new OrderInfoDTO();
         orderInfo.setId(21122L);
         orderInfo.setCity("322332");
         orderInfo.setBuyerRemark("232323");
@@ -91,13 +85,7 @@ public class ChannelController extends BaseController {
         mqOrderDTO.setOrderId(1111111L);
         mqOrderDTO.setMemberId(22222L);
         //死信队列
-        immediateSender.sendMessage(mqOrderDTO, 2 * 60 * 1000 );
-
-        // 发送存入订单主表MQ
-       // log.info("推送MQ消息，订单超时未付款使用");
-//        this.convertAndSend(RabbitMQConstants.ORDER_SUMMARY_EXCHANGE, RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY,
-//                JacksonUtil.toJson(orderInfo));
-
+        immediateSender.sendMessage(mqOrderDTO, 2 * 60 * 1000);
 
         Channel channel = channelService.getById(id);
         // callback params
@@ -119,23 +107,6 @@ public class ChannelController extends BaseController {
         monitorReadIp(request, id);
         model.put("view", view);
         return view(Views.ROUTE_POST_VIEW);
-    }
-    /**
-     * 发送消息
-     *
-     * @param exchange        交换机名称
-     * @param routingKey      路由key
-     * @param message         消息内容
-     * @throws AmqpException
-     */
-    private void convertAndSend(String exchange, String routingKey, final Object message) throws AmqpException {
-        try {
-            rabbitTemplate.convertAndSend(exchange, routingKey, message);
-        } catch (Exception e) {
-            logger.error("MQ消息发送异常，消息ID：{}，消息体:{}, exchangeName:{}, routingKey:{}",
-                     JSON.toJSONString(message), exchange, routingKey, e);
-            // TODO 保存消息到数据库
-        }
     }
 
     public void monitorReadIp(HttpServletRequest request, Long id) {

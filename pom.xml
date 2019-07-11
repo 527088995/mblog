@@ -197,11 +197,7 @@
 			<artifactId>lombok</artifactId>
 			<version>1.16.20</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.amqp</groupId>
-			<artifactId>spring-rabbit</artifactId>
-			<version>1.7.8.RELEASE</version>
-		</dependency>
+
 		<!--阿里插件-->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
