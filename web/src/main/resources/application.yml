@@ -1,5 +1,5 @@
 server:
-    port: 80 #服务器用80端口
+    port: 8080 #服务器用80端口
 spring:
     devtools:
         enabled: true
