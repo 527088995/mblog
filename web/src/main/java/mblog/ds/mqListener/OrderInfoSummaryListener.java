@@ -1,14 +1,15 @@
 package mblog.ds.mqListener;
 
-import lombok.extern.slf4j.Slf4j;
 import mblog.ds.rabbit.RabbitMQConstants;
-import mblog.ds.rabbit.dto.OrderInfoDTO;
+import mblog.modules.authc.entity.Monitor;
+import mblog.modules.authc.service.MonitorService;
 import mblog.util.JacksonUtil;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,9 +23,10 @@ public class OrderInfoSummaryListener {
 
     private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("mblog");
 
-//    @Resource
-//    OrderInfoSummaryBusiness orderInfoBusiness;
-
+    //@Resource
+    //OrderInfoSummaryBusiness orderInfoBusiness;
+    @Autowired
+    private MonitorService monitorService;
     /**
      *功能描述 消费正常队列
      *
@@ -39,23 +41,23 @@ public class OrderInfoSummaryListener {
             key = RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY))
     public void receiveMessage(String s, Message message) {
         try {
-            log.info(">>>>>>>>>>>>>>消费正常队列收到订单汇总表MQ" + s);
+            log.info(">>>>>>>>>>>>>>消费正常队列监控访问文章mq" + s);
             log.info("============" + new String(message.getBody()) + "==============");
 
             String str = new String(message.getBody());
-            OrderInfoDTO oo = JacksonUtil.fromJson(str, OrderInfoDTO.class);
-            if (oo == null ) {
-                log.info(">>>>>>>>>>>>>>正常队列订单汇总MQ消费异常：订单参数异常");
+            Monitor monitor = JacksonUtil.fromJson(str, Monitor.class);
+            if (monitor == null ) {
+                log.info(">>>>>>>>>>>>>>正常队列监控访问文章mq消费异常：订单参数异常");
                 return;
             }
-
-            //boolean rb = orderInfoBusiness.saveOrderInfoSummaryByOrderId(oo);
+            monitorService.saveMonitor(monitor);
+           // boolean rb = orderInfoBusiness.saveOrderInfoSummaryByOrderId(oo);
             boolean rb = true;
             if (!rb) {
-                log.info(">>>>>>>>>>>>>>正常队列订单汇总MQ消费异常：订单参数异常");
+                log.info(">>>>>>>>>>>>>>正常队列监控访问文章mq消费异常：订单参数异常");
             }
         } catch (Exception e) {
-            log.error("RabbitMQ Error 正常队列订单汇总MQ消费" + e.getMessage(), e);
+            log.error("RabbitMQ Error 正常队列监控访问文章mq消费" + e.getMessage(), e);
         }
     }
 
@@ -68,30 +70,30 @@ public class OrderInfoSummaryListener {
      * @author wj
      * @date 2019/3/12 15:32
      */
-    @RabbitListener(bindings = @QueueBinding(value = @Queue(value = RabbitMQConstants.ORDER_DEAD_ROUTING_KEY, durable = "true"),
-            exchange = @Exchange(value = RabbitMQConstants.ORDER_DEAD_EXCHANGE_NAME),
-            key = RabbitMQConstants.ORDER_DEAD_ROUTING_KEY))
-    public void receiveDeadMessage(String s, Message message) {
-        try {
-            log.info(">>>>>>>>>>>>>>消费死信队列收到订单汇总表MQ" + s);
-            log.info("============" + new String(message.getBody()) + "==============");
-
-            String str = new String(message.getBody());
-            OrderInfoDTO oo = JacksonUtil.fromJson(str, OrderInfoDTO.class);
-            if (oo == null ) {
-                log.info(">>>>>>>>>>>>>>死信队列订单汇总MQ消费异常：订单参数异常");
-                return;
-            }
-
-            //boolean rb = orderInfoBusiness.saveOrderInfoSummaryByOrderId(oo);
-            boolean rb = true;
-            if (!rb) {
-                log.info(">>>>>>>>>>>>>>死信队列订单汇总MQ消费异常：订单参数异常");
-            }
-        } catch (Exception e) {
-            log.error("RabbitMQ Error 死信队列订单汇总MQ消费" + e.getMessage(), e);
-        }
-    }
+//    @RabbitListener(bindings = @QueueBinding(value = @Queue(value = RabbitMQConstants.ORDER_DEAD_ROUTING_KEY, durable = "false"),
+//            exchange = @Exchange(value = RabbitMQConstants.ORDER_DEAD_EXCHANGE_NAME),
+//            key = RabbitMQConstants.ORDER_DEAD_ROUTING_KEY))
+//    public void receiveDeadMessage(String s, Message message) {
+//        try {
+//            log.info(">>>>>>>>>>>>>>消费死信队列收到订单汇总表MQ" + s);
+//            log.info("============" + new String(message.getBody()) + "==============");
+//
+//            String str = new String(message.getBody());
+//            OrderInfoDTO oo = JacksonUtil.fromJson(str, OrderInfoDTO.class);
+//            if (oo == null ) {
+//                log.info(">>>>>>>>>>>>>>死信队列监控访问文章mq消费异常：订单参数异常");
+//                return;
+//            }
+//
+//            //boolean rb = orderInfoBusiness.saveOrderInfoSummaryByOrderId(oo);
+//            boolean rb = true;
+//            if (!rb) {
+//                log.info(">>>>>>>>>>>>>>死信队列监控访问文章mq消费异常：订单参数异常");
+//            }
+//        } catch (Exception e) {
+//            log.error("RabbitMQ Error 死信队列监控访问文章mq消费" + e.getMessage(), e);
+//        }
+//    }
 
 
 }

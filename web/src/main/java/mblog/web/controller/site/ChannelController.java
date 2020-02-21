@@ -79,24 +79,7 @@ public class ChannelController extends BaseController {
         int pn = ServletRequestUtils.getIntParameter(request, "pn", 1);
         String blogClass = request.getParameter("blogClass");//匹配博客分类
 
-        String beanStr = net.sf.json.JSONObject.fromObject(model).toString();
-        //存储到缓存
-      //  JedisUtil.setJson(RewardDetailRedisKeysConstants.REWARDLEVEL, beanStr);
-        // 服务中没有，默认30分钟
-        OrderInfoDTO orderInfo=new OrderInfoDTO();
-        orderInfo.setId(21122L);
-        orderInfo.setCity("322332");
-        orderInfo.setBuyerRemark("232323");
-        MqOrderDTO mqOrderDTO = new MqOrderDTO();
-        mqOrderDTO.setOrderId(1111111L);
-        mqOrderDTO.setMemberId(22222L);
-        //死信队列
-        immediateSender.sendMessage(mqOrderDTO, 2 * 60 * 1000 );
 
-        // 发送存入订单主表MQ
-       // log.info("推送MQ消息，订单超时未付款使用");
-//        this.convertAndSend(RabbitMQConstants.ORDER_SUMMARY_EXCHANGE, RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY,
-//                JacksonUtil.toJson(orderInfo));
 
 
         Channel channel = channelService.getById(id);
@@ -112,10 +95,9 @@ public class ChannelController extends BaseController {
     @RequestMapping("/view/{id}")
     public String view(@PathVariable Long id, ModelMap model, HttpServletRequest request) {
         PostVO view = postService.get(id);
-
         Assert.notNull(view, "该文章已被删除");
-
         postService.identityViews(id);
+        //监控文章访问
         monitorReadIp(request, id);
         model.put("view", view);
         return view(Views.ROUTE_POST_VIEW);
@@ -138,6 +120,11 @@ public class ChannelController extends BaseController {
         }
     }
 
+    /**
+     * 监控文章访问
+     * @param request
+     * @param id
+     */
     public void monitorReadIp(HttpServletRequest request, Long id) {
         Monitor monitor = new Monitor();
         String ip = request.getHeader("X-real-ip");//先从nginx自定义配置获取
@@ -165,7 +152,7 @@ public class ChannelController extends BaseController {
         String json_result = null;
         try {
             if ("127.0.0.1".equals(ip)) {
-                ip = "60.209.29.59";
+                ip = "127.0.0.1";
             }
             json_result = AddressUtils.getAddresses("ip=" + ip, "utf-8");
         } catch (UnsupportedEncodingException e) {
@@ -207,6 +194,24 @@ public class ChannelController extends BaseController {
         if (profile != null && profile.getBadgesCount() != null) {
             monitor.setUserId(profile.getId());
         }
-        monitorService.saveMonitor(monitor);
+
+        //存储到缓存
+        //  JedisUtil.setJson(RewardDetailRedisKeysConstants.REWARDLEVEL, beanStr);
+        // 服务中没有，默认30分钟
+        OrderInfoDTO orderInfo=new OrderInfoDTO();
+        orderInfo.setId(21122L);
+        orderInfo.setCity("322332");
+        orderInfo.setBuyerRemark("232323");
+        MqOrderDTO mqOrderDTO = new MqOrderDTO();
+        mqOrderDTO.setOrderId(1111111L);
+        mqOrderDTO.setMemberId(22222L);
+        //死信队列
+        // immediateSender.sendMessage(mqOrderDTO, 2 * 60 * 1000 );
+
+        // 监控访问文章mq
+        logger.info("推送MQ消息，--监控访问文章mq");
+        this.convertAndSend(RabbitMQConstants.ORDER_SUMMARY_EXCHANGE, RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY,
+                JacksonUtil.toJson(monitor));
+
     }
 }
