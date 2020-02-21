@@ -80,8 +80,6 @@ public class ChannelController extends BaseController {
         String blogClass = request.getParameter("blogClass");//匹配博客分类
 
 
-
-
         Channel channel = channelService.getById(id);
         // callback params
         model.put("channel", channel);
@@ -95,7 +93,9 @@ public class ChannelController extends BaseController {
     @RequestMapping("/view/{id}")
     public String view(@PathVariable Long id, ModelMap model, HttpServletRequest request) {
         PostVO view = postService.get(id);
+
         Assert.notNull(view, "该文章已被删除");
+
         postService.identityViews(id);
         //监控文章访问
         monitorReadIp(request, id);

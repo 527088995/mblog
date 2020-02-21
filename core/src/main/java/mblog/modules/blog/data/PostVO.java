@@ -34,12 +34,12 @@ public class PostVO extends Post implements Serializable {
 	@JSONField(serialize = false)
 	private PostAttribute attribute;
 	
-	public String[] getTagsArray() {
-		if (StringUtils.isNotBlank(super.getTags())) {
-			return super.getTags().split(Consts.SEPARATOR);
-		}
-		return null;
-	}
+//	public String[] getTagsArray() {
+//		if (StringUtils.isNotBlank(super.getTags())) {
+//			return super.getTags().split(Consts.SEPARATOR);
+//		}
+//		return null;
+//	}
 
 	public UserVO getAuthor() {
 		return author;
