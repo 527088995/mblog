@@ -146,7 +146,7 @@ public class ArticleServiceImpl implements ArticleService {
         Element body = doc.body();
         //将爬取出来的文章封装到Artcle中，并放到ArrayList里面去
         Elements articleListDiv = body.getElementById("articleContent").children();
-        articleListDiv.remove(0);
+        //articleListDiv.remove(0);
         String html="<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<body>"+"<div class=\"htmledit_views\" id=\"content_views\"> "+articleListDiv.outerHtml()+"</div>";
