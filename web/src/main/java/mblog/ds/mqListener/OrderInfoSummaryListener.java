@@ -28,7 +28,7 @@ public class OrderInfoSummaryListener {
     @Autowired
     private MonitorService monitorService;
     /**
-     *功能描述 消费正常队列
+     *功能描述 消费正常队列(收到订单汇总表MQ)
      *
      * @param s
     	* @param message
@@ -41,23 +41,23 @@ public class OrderInfoSummaryListener {
             key = RabbitMQConstants.ORDER_SUMMARY_ROUTINGKEY))
     public void receiveMessage(String s, Message message) {
         try {
-            log.info(">>>>>>>>>>>>>>消费正常队列监控访问文章mq" + s);
+            log.info(">>>>>>>>>>>>>>消费正常队列(收到订单汇总表MQ)监控访问文章mq" + s);
             log.info("============" + new String(message.getBody()) + "==============");
 
             String str = new String(message.getBody());
             Monitor monitor = JacksonUtil.fromJson(str, Monitor.class);
             if (monitor == null ) {
-                log.info(">>>>>>>>>>>>>>正常队列监控访问文章mq消费异常：订单参数异常");
+                log.info(">>>>>>>>>>>>>>正常队列监控(收到订单汇总表MQ)访问文章mq消费异常：订单参数异常");
                 return;
             }
             monitorService.saveMonitor(monitor);
            // boolean rb = orderInfoBusiness.saveOrderInfoSummaryByOrderId(oo);
             boolean rb = true;
             if (!rb) {
-                log.info(">>>>>>>>>>>>>>正常队列监控访问文章mq消费异常：订单参数异常");
+                log.info(">>>>>>>>>>>>>>正常队列监控(收到订单汇总表MQ)访问文章mq消费异常：订单参数异常");
             }
         } catch (Exception e) {
-            log.error("RabbitMQ Error 正常队列监控访问文章mq消费" + e.getMessage(), e);
+            log.error("RabbitMQ Error 正常队列监控(收到订单汇总表MQ)访问文章mq消费" + e.getMessage(), e);
         }
     }
 
